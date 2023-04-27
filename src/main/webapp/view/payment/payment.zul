@@ -1,0 +1,121 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winPayment" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.PaymentVm')"
+		validationMessages="@id('vmsgs')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Pembayaran Iuran</n:span>
+		</caption>
+		<groupbox id="gbForm" mold="3d">
+			<caption>
+				<n:span class="h5 fw-bold mb-0">
+					<n:i class="fas fa-cog"></n:i>
+					Formulir Pembayaran
+				</n:span>
+			</caption>
+
+			<grid>
+				<columns>
+					<column width="30%" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Nama" />
+						<label value="@load(vm.anggota.nama)" />
+					</row>
+					<row>
+						<label value="E-Mail" />
+						<label value="@load(vm.anggota.email)" />
+					</row>
+					<row>
+						<label value="Cabang" />
+						<label value="@load(vm.anggota.mcabang.cabang)" />
+					</row>
+					<row>
+						<label value="Periode Aktif S/D" />
+						<label />
+					</row>
+					<row>
+						<label
+							value="Jumlah Periode Bulan Yang Ingin Dibayar" />
+						<combobox id="cbCharge"
+							selectedItem="@bind(vm.qty)"
+							onChange="@command('doCal', qty=vm.qty)" readonly="true">
+						</combobox>
+					</row>
+					<row>
+						<label />
+						<grid id="gridCharge">
+							<columns>
+								<column label="Komponen" />
+								<column label="Biaya" align="right" />
+							</columns>
+							<foot>
+								<footer>
+									<label
+										value="Total Yang Harus Dibayar" />
+								</footer>
+								<footer>
+									<decimalbox
+										value="@load(vm.totalpayment)" format="#,##0" readonly="true"
+										style="text-align: right" />
+								</footer>
+							</foot>
+						</grid>
+					</row>
+				</rows>
+				<foot>
+					<footer />
+					<footer>
+						<button id="btSave" width="100%"
+							label="Generate Virtual Account" autodisable="self"
+							sclass="btn btn-primary btn-sm" onClick="@command('doSave')" />
+					</footer>
+				</foot>
+			</grid>
+		</groupbox>
+		<separator />
+		<div id="divProcessinfo" class="note note-info mb-3"
+			visible="false">
+			<n:strong>Status Proses Generate Pembayaran :</n:strong>
+			<separator />
+			<label value="@load(vm.processinfo)" />
+		</div>
+		<separator />
+
+		<groupbox mold="3d">
+			<caption>
+				<n:span class="h5 fw-bold mb-0">
+					<n:i class="fas fa-cog"></n:i>
+					Riwayat Pembayaran
+				</n:span>
+			</caption>
+			<div class="row">
+				<div class="col-md-10">
+					<paging id="paging" autohide="true" />
+				</div>
+				<div class="col-md-2" align="right">
+					<label value="${labels.common.totalrecord} :"
+						style="font-weight: bold" />
+					<label value="@load(vm.pageTotalSize)"
+						style="font-weight: bold" />
+				</div>
+			</div>
+			<grid id="gridHist"
+				emptyMessage="${labels.common.emptymsg}">
+				<columns>
+					<column label="No" align="right" width="40px" />
+					<column label="Kode Tagihan" align="center" />
+					<column label="Tanggal Tagihan" align="center" />
+					<column label="Nominal Tagihan" align="right" />
+					<column label="Jatuh Tempo" align="center" />
+					<column label="Nomor VA" align="center" />
+					<column label="Keterangan" />
+					<column label="Status" align="center" />
+				</columns>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

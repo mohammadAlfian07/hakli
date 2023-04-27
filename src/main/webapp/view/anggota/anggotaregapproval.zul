@@ -1,0 +1,390 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winAnggotaRegApproval" border="normal" width="90%"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.AnggotaRegApprovalVm')"
+		validationMessages="@id('vmsgs')">
+		<caption>
+			<n:i class="fas fa-info"></n:i>
+			<n:span>Informasi Detail Data Anggota</n:span>
+		</caption>
+		<div id="divForm"
+			form="@id('e') @load(vm.pribadi) @save(vm.pribadi, before='doSave') @validator(vm.validator) ">
+
+			<!-- Tabs navs -->
+			<n:ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+				<n:li class="nav-item" role="presentation">
+					<n:a class="nav-link active" id="ex1-tab-1"
+						data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+						aria-controls="ex1-tabs-1" aria-selected="true">
+						<n:i class="fas fa-user-tag"></n:i>
+						Data Pribadi
+					</n:a>
+				</n:li>
+				<n:li class="nav-item" role="presentation">
+					<n:a class="nav-link" id="ex1-tab-2"
+						data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
+						aria-controls="ex1-tabs-2" aria-selected="false">
+						<n:i class="far fa-address-card"></n:i>
+						Keanggotaan
+					</n:a>
+				</n:li>
+				<n:li class="nav-item" role="presentation">
+					<n:a class="nav-link" id="ex1-tab-3"
+						data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
+						aria-controls="ex1-tabs-3" aria-selected="false">
+						<n:i class="fas fa-building"></n:i>
+						Pekerjaan
+					</n:a>
+				</n:li>
+				<n:li class="nav-item" role="presentation">
+					<n:a class="nav-link" id="ex1-tab-4"
+						data-mdb-toggle="tab" href="#ex1-tabs-4" role="tab"
+						aria-controls="ex1-tabs-4" aria-selected="false">
+						<n:i class="fas fa-school"></n:i>
+						Pendidikan
+					</n:a>
+				</n:li>
+				<n:li class="nav-item" role="presentation">
+					<n:a class="nav-link" id="ex1-tab-5"
+						data-mdb-toggle="tab" href="#ex1-tabs-5" role="tab"
+						aria-controls="ex1-tabs-7" aria-selected="false">
+						<n:i class="fas fa-address-book"></n:i>
+						Info Kontak
+					</n:a>
+				</n:li>
+				<n:li class="nav-item" role="presentation">
+					<n:a class="nav-link" id="ex1-tab-6"
+						data-mdb-toggle="tab" href="#ex1-tabs-6" role="tab"
+						aria-controls="ex1-tabs-7" aria-selected="false">
+						<n:i class="fas fa-check"></n:i>
+						Approval
+					</n:a>
+				</n:li>
+			</n:ul>
+			<!-- Tabs navs -->
+
+			<!-- Tabs content -->
+			<div class="tab-content" id="ex1-content">
+				<n:div class="tab-pane fade show active" id="ex1-tabs-1"
+					role="tabpanel" aria-labelledby="ex1-tab-1">
+					<n:table
+						class="table table-sm table-striped mb-0">
+						<n:tr>
+							<n:td colspan="2">
+								<image id="photo" width="140px" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td width="30%">
+								<label value="${labels.anggota.nama}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.nama)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.anggota.noktp}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.noktp)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label
+									value="${labels.anggota.tempatlahir}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.tempatlahir)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label
+									value="${labels.anggota.tgllahir}" />
+							</n:td>
+							<n:td>
+								<label
+									value="@load(e.tgllahir) @converter('formatedDate', format='dd MMM yyyy')" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.anggota.gender}" />
+							</n:td>
+							<n:td>
+								<radiogroup
+									selectedItem="@bind(e.gender)" disabled="true">
+									<radio value="P" label="Pria" />
+									<radio value="W" label="Wanita" />
+								</radiogroup>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.anggota.agama}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.agama)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label
+									value="${labels.anggota.warganegara}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.warganegara)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.area.negara}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.mnegara.negara)" />
+							</n:td>
+						</n:tr>
+					</n:table>
+					<n:hr />
+					<n:h5>Alamat Rumah</n:h5>
+					<n:table
+						class="table table-sm table-striped mb-0">
+						<n:tr>
+							<n:td width="30%">
+								<label value="${labels.area.prov}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.provname)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.area.kab}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.kabname)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.area.alamat}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.alamat)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label
+									value="${labels.anggota.kodepos}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.kodepos)" />
+							</n:td>
+						</n:tr>
+					</n:table>
+				</n:div>
+				<n:div class="tab-pane fade" id="ex1-tabs-2"
+					role="tabpanel" aria-labelledby="ex1-tab-2">
+					<n:table
+						class="table table-sm table-striped mb-0">
+						<n:tr>
+							<n:td width="30%">
+								<label
+									value="${labels.anggota.statusanggota}" />
+							</n:td>
+							<n:td>
+								<combobox id="cbStatusanggota"
+									selectedItem="@bind(e.statusanggota)" readonly="true"
+									buttonVisible="false">
+									<comboitem value="Anggota Biasa"
+										label="Anggota Biasa" />
+									<comboitem value="Anggota Muda"
+										label="Anggota Muda" />
+									<comboitem value="Anggota Pusat"
+										label="Pengurus Pusat" />
+								</combobox>
+							</n:td>
+							<n:tr>
+								<n:td>
+									<label
+										value="${labels.area.prov}" />
+								</n:td>
+								<n:td>
+									<label
+										value="@load(e.mcabang.mprovinsi.provname)" />
+								</n:td>
+							</n:tr>
+							<n:tr>
+								<n:td>
+									<label
+										value="${labels.anggota.cabang}" />
+								</n:td>
+								<n:td>
+									<label
+										value="@load(e.mcabang.cabang)" />
+								</n:td>
+							</n:tr>
+						</n:tr>
+					</n:table>
+				</n:div>
+				<n:div class="tab-pane fade" id="ex1-tabs-3"
+					role="tabpanel" aria-labelledby="ex1-tab-3">
+					<grid id="gridPekerjaan">
+						<columns>
+							<column
+								label="${labels.pekerjaan.namakantor}" />
+							<column label="${labels.area.prov}" />
+							<column label="${labels.area.kab}" />
+							<column label="${labels.area.alamat}" />
+							<column label="${labels.pekerjaan.rumpun}" />
+							<column
+								label="${labels.pekerjaan.kepegawaian}" />
+							<column label="${labels.pekerjaan.jabatan}" />
+							<column label="${labels.pekerjaan.nip}" />
+							<column label="${labels.pekerjaan.period}" />
+							<column label="${labels.pekerjaan.nosk}" />
+							<column
+								label="${labels.pekerjaan.keterangan}" />
+							<column label="${labels.pekerjaan.notelp}" />
+							<column label="${labels.pekerjaan.nofax}" />
+						</columns>
+					</grid>
+				</n:div>
+				<n:div class="tab-pane fade" id="ex1-tabs-4"
+					role="tabpanel" aria-labelledby="ex1-tab-4">
+					<grid id="gridPendidikan">
+						<columns>
+							<column
+								label="${labels.pendidikan.universitas}" />
+							<column
+								label="${labels.pendidikan.jenjang}" />
+							<column label="${labels.pendidikan.minat1}" />
+							<column label="${labels.pendidikan.minat2}" />
+							<column label="${labels.pendidikan.period}" />
+							<column
+								label="${labels.pendidikan.noijazah}" />
+						</columns>
+					</grid>
+				</n:div>
+				<n:div class="tab-pane fade" id="ex1-tabs-5"
+					role="tabpanel" aria-labelledby="ex1-tab-5">
+					<n:table
+						class="table table-sm table-striped mb-0">
+						<n:tr>
+							<n:td width="30%">
+								<label value="${labels.anggota.email}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.email)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.anggota.telp}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.telp)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="${labels.anggota.hp}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.hp)" />
+							</n:td>
+						</n:tr>
+					</n:table>
+					<n:hr />
+					<n:h5>Kontak Darurat</n:h5>
+					<n:table
+						class="table table-sm table-striped mb-0">
+						<n:tr>
+							<n:td width="30%">
+								<label
+									value="${labels.anggota.namadarurat}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.namadarurat)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label
+									value="${labels.anggota.hubungandarurat}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.hubungan)" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label
+									value="${labels.anggota.hpdarurat}" />
+							</n:td>
+							<n:td>
+								<label value="@load(e.nohpdarurat)" />
+							</n:td>
+						</n:tr>
+					</n:table>
+				</n:div>
+				<n:div class="tab-pane fade" id="ex1-tabs-6"
+					role="tabpanel" aria-labelledby="ex1-tab-6">
+					<n:table
+						class="table table-sm table-striped mb-0">
+						<n:tr>
+							<n:td width="30%">
+								<label value="Hasil Verifikasi" />
+							</n:td>
+							<n:td>
+								<vlayout>
+									<radiogroup id="rgDecision"
+										selectedItem="@bind(e.statusreg)" orient="vertical"
+										onCheck="@command('doCheckDecision', status=e.statusreg)">
+										<radio value="2"
+											label="Setujui dan Generate Pembayaran VA" />
+										<radio value="9" label="Tolak" />
+									</radiogroup>
+									<label style="color:gray"
+										value="@load(vmsgs['statusreg'])" />
+								</vlayout>
+								<vlayout>
+									<textbox id="tbMemo"
+										value="@bind(e.regmemo)"
+										placeholder="Alasan Penolakan (Maks 100 Karakter)"
+										maxlength="100" rows="5" width="100%" visible="false" />
+									<label style="color:gray"
+										value="@load(vmsgs['regmemo'])" />
+								</vlayout>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label />
+							</n:td>
+							<n:td>
+								<button id="btSave"
+									iconSclass="z-icon-save"
+									label="Submit Keputusan Hasil Verifikasi" autodisable="self"
+									sclass="btn btn-primary btn-sm" onClick="@command('doSave')" />
+							</n:td>
+						</n:tr>
+					</n:table>
+					<separator />
+					<div id="divProcessinfo"
+						class="note note-warning mb-3" visible="false">
+						<n:strong>
+							Status Hasil Proses Verifikasi :
+						</n:strong>
+						<label value="@load(vm.processinfo)" />
+					</div>
+				</n:div>
+			</div>
+			<!-- Tabs content -->
+			<separator />
+		</div>
+	</window>
+</zk>

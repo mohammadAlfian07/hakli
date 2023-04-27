@@ -1,0 +1,10 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winPaymentHist" border="normal">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Riwayat Pembayaran</n:span>
+		</caption>
+		<n:h3>On Progress Development</n:h3>
+	</window>
+</zk>

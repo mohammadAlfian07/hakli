@@ -1,0 +1,39 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.DashboardVm')">
+		<caption>
+			<n:i class="fas fa-chart-line"></n:i>
+			<n:span>Dashboard</n:span>
+		</caption>
+
+		<div class="row">
+			<div class="col-5">
+				<div class="card text-white bg-primary mb-3"
+					style="max-width: 18rem;">
+					<div class="card-header">
+						<n:h5 class="card-title">Total Anggota</n:h5>
+					</div>
+					<div class="card-body">
+						<label sclass="card-text"
+							value="@load(vm.totalanggota)" style="font-size: 20px" />
+					</div>
+				</div>
+				<separator />
+				<n:h6>
+					10 Cabang Teratas
+				</n:h6>
+				<grid id="grid">
+					<columns>
+						<column label="Cabang" />
+						<column label="Anggota" align="right" />
+					</columns>
+				</grid>
+			</div>
+			<div class="col-7">
+				<charts id="chart" type="pie"
+					title="Sebarang Anggota DiSeluruh Cabang" />
+			</div>
+		</div>
+	</window>
+</zk>

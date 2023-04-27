@@ -1,0 +1,73 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winJuknis" border="normal">
+		<caption>
+			<n:i class="fas fa-info"></n:i>
+			<n:span>Petunjuk Teknis</n:span>
+		</caption>
+		<groupbox mold="3d" closable="false">
+			<caption>Petunjuk Teknis P2KB Anggota</caption>
+			Berikut ini akan dijelaskan langkah - langkah P2KB yang
+			harus dilakukan oleh anggota organisasi dalam melakukan
+			aktifitas dokumentasi pada aplikasi P2KB HAKLI.
+			<separator />
+			<grid>
+				<columns>
+					<column width="25%" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Langkah 1" />
+						<vlayout>
+							<label value="Permohonan Melakukan P2KB"
+								style="font-weight: bold" />
+							<label
+								value="Berikut ini akan dijelaskan langkah - langkah P2KB yang harus dilakukan oleh anggota organisasi dalam melakukan aktifitas dokumentasi pada aplikasi P2KB HAKLI." />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Langkah 2" />
+						<vlayout>
+							<label
+								value="Pencatatan kegiatan P2KB pada borang pengisian"
+								style="font-weight: bold" />
+							<label
+								value="Anggota organisasi melakukan pencatatan kegiatan P2KB dalam fasilitas PRIVATE AREA > P2KB > Borang Pengisian . Dalam fasilitas ini anggota telah disediakan daftar kegiatan beserta sistem perolehan nilai SKP untuk setiap kegiatan. Hasil dari pencatatan dapat dilihat pada Buku Log dan Dashboard P2KB untuk memudahkan anggota dalam melakukan kontrol terhadap kegiatan yang akan dicatat." />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Langkah 3" />
+						<vlayout>
+							<label
+								value="Pengelolaan buku log kegiatan P2KB"
+								style="font-weight: bold" />
+							<label
+								value="Buku log anggota dalam fasilitas PRIVATE AREA > P2KB > Buku Log merupakan hasil dari pencatatan yang dilakukan pada fasilitas PRIVATE AREA > P2KB > Borang Pengisian. Buku log ini berguna untuk memonitoring pencatatan kegiatan P2KB serta hasil evaluasi yang telah dilakukan oleh Tim P2KB wilayah. Sistem penyajian data dikelompokkan setiap tahunnya berdasarkan data STR yang telah diisikan dalam fasilitas sebelumnya." />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Langkah 4" />
+						<vlayout>
+							<label
+								value="Pengelolaan dokumen persyaratan"
+								style="font-weight: bold" />
+							<label
+								value="Untuk memenuhi persyaratan evaluasi kegiatan anggota maka disediakan fasilitas PRIVATE AREA > P2KB > Dokumen Persyaratan. Fasilitas ini berguna untuk melampirkan dokumen persyaratan yang dibutuhkan oleh Tim P2KB dan Komisi P2KB sebagai parameter dalam menentukan hasil evaluasi kegiatan P2KB anggota. Dokumen persyaratan yang dimaksud antara lain adalah surat pengantar dari HAKLI Cabang, Dokumen keterangan kesehatan, dan dokumen dari komisi etik bila ada." />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Langkah 5" />
+						<vlayout>
+							<label
+								value="Rangkuman Penilaian P2KB"
+								style="font-weight: bold" />
+							<label
+								value="Hasil dari pencatatan kegiatan P2KB anggota dapat dilihat difasilitas PRIVATE AREA > P2KB > Rangkuman Penilaian P2KB. Fasilitas ini memberikan rangkuman laporan kegiatan P2KB anggota dalam periode STR yang telah dicatatkan serta memberikan fasilitas untuk melakukan pengajuan evaluasi guna memberikan notifikasi kepada Komisi P2KB untuk segera melakukan evaluasi terhadap tahun kegiatan yang diajukan." />
+						</vlayout>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

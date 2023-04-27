@@ -1,0 +1,57 @@
+<?page title="${desktop.webApp.appName}" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" ?>
+<?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" ?>
+<?link rel="stylesheet" type="text/css"	href="/mdb/css/mdb.min.css" ?>
+<zk xmlns:n="native">
+
+	<n:section class="vh-100" style="background-color: #d1d2f0;">
+		<div class="container py-5 h-100">
+			<div
+				class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col col-xl-10">
+					<div class="card" style="border-radius: 1rem;">
+						<div class="row g-0">
+							<div
+								class="col-md-6 col-lg-5 d-none d-md-block">
+								<n:img
+									src="/hakli/img/landing.jpg"
+									alt="login form" class="img-fluid"
+									style="border-radius: 1rem 0 0 1rem;" />
+							</div>
+							<div
+								class="col-md-6 col-lg-7 d-flex align-items-center">
+								<div
+									class="card-body p-4 p-lg-5 text-black">
+
+									<n:form>
+
+										<n:h4 class="card-title">
+											You are logged out from
+											${desktop.webApp.appName}.
+										</n:h4>
+										<n:p class="card-text">
+											Thank You for using this
+											application.
+											<n:br />
+											Please log in to using this
+											application again.
+											<n:br />
+											<n:a href="/hakli/loginadm.zul" class="btn btn-info btn-block my-4 rounded-pill"
+												role="button">
+												Log In
+											</n:a>
+
+										</n:p>
+
+									</n:form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</n:section>
+	<script src="/mdb/js/mdb.min.js"></script>
+</zk>

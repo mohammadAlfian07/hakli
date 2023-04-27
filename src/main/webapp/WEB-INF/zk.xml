@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	
+	<preference>
+		<name>org.zkoss.zk.ui.WebApp.name</name>
+		<value>Hakli</value>
+	</preference>
+	
+	<listener>
+		<listener-class>com.sds.utils.db.HibernateListeners</listener-class>		
+	</listener>
+	
+	<library-property>
+		<name>org.zkoss.theme.preferred</name>
+		<value>iceblue_c</value>
+	</library-property>
+	
+</zk>

@@ -1,0 +1,10 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winP2kbForm" border="normal">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Permohonan Melakukan P2KB</n:span>
+		</caption>
+		<n:h3>On Progress Development</n:h3>
+	</window>
+</zk>

@@ -1,0 +1,135 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winP2kbe09" border="normal" width="80%"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.P2kbE09Vm')"
+		validationMessages="@id('vmsgs')">
+		<caption>
+			<n:i class="fas fa-edit"></n:i>
+			<n:span>Borang Pengisian</n:span>
+		</caption>
+		<groupbox mold="3d" closable="false"
+			form="@id('e') @load(vm.objForm) @save(vm.objForm, before='doSave')
+			@validator(vm.validator) ">
+			<caption label="@load(e.mp2kbkegiatan.kegiatan)" />
+			<grid>
+				<columns>
+					<column width="30%" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Judul Penelitian" />
+						<vlayout>
+							<textbox hflex="1" value="@bind(e.judul)"
+								maxlength="70" />
+							<label style="color:gray"
+								value="@load(vmsgs['judul'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Status Peneliti" />
+						<vlayout>
+							<radiogroup
+								selectedItem="@bind(e.statuspeneliti)">
+								<radio label="Peneliti Utama" value="Peneliti Utama" />
+								<radio label="Peneliti Kedua dst"
+									value="Peneliti Kedua dst" />
+							</radiogroup>
+							<label style="color:gray"
+								value="@load(vmsgs['statuspeneliti'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Area Kegiatan" />
+						<vlayout>
+							<combobox
+								selectedItem="@bind(e.area)">
+								<comboitem value="Gagasan"
+									label="Gagasan" />
+								<comboitem value="Konsep"
+									label="Konsep" />
+								<comboitem value="Praktek" label="Praktek" />
+							</combobox>
+							<label style="color:gray"
+								value="@load(vmsgs['area'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Nama Institusi" />
+						<vlayout>
+							<textbox hflex="1" value="@bind(e.institusi)"
+								maxlength="70" />
+							<label style="color:gray"
+								value="@load(vmsgs['institusi'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Dokumen Bukti Kegiatan" />
+						<vlayout>
+							<hlayout>
+								<button sclass="btn btn-info btn-sm"
+									label="Browse..." upload="true,maxsize=1000"
+									onUpload="@command('doUpload', upEvent=event)"
+									autodisable="self" />
+								<separator orient="vertical" />
+								<label value="@load(vm.docfilename)" />
+							</hlayout>
+							<label style="color:gray"
+								value="@load(vmsgs['media'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Tanggal Mulai" />
+						<vlayout>
+							<datebox value="@bind(e.tglmulai)"
+								format="dd-MM-yyyy" maxlength="10" cols="12" />
+							<label style="color:gray"
+								value="@load(vmsgs['tglmulai'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Tanggal Akhir" />
+						<vlayout>
+							<datebox value="@bind(e.tglakhir)"
+								format="dd-MM-yyyy" maxlength="10" cols="12" />
+							<label style="color:gray"
+								value="@load(vmsgs['tglakhir'])" />
+						</vlayout>
+					</row>
+				</rows>
+				<foot>
+					<footer />
+					<footer>
+						<button id="btSave" width="100%"
+							iconSclass="z-icon-save" label="Simpan" autodisable="self"
+							sclass="btn btn-primary btn-sm" onClick="@command('doSave')" />
+					</footer>
+				</foot>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d" closable="false">
+			<caption label="Keterangan Parameter Penilaian" />
+			<grid>
+				<columns>
+					<column label="Parameter" />
+					<column label="Nilai SKP" align="right" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Gagasan" />
+						<label value="1 SKP" />
+					</row>
+					<row>
+						<label value="Konsep" />
+						<label value="2 SKP" />
+					</row>
+					<row>
+						<label value="Praktek" />
+						<label value="3 SKP" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

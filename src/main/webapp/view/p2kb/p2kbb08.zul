@@ -1,0 +1,181 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winP2kbb08" border="normal" width="80%"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.P2kbB08Vm')"
+		validationMessages="@id('vmsgs')">
+		<caption>
+			<n:i class="fas fa-edit"></n:i>
+			<n:span>Borang Pengisian</n:span>
+		</caption>
+		<groupbox mold="3d" closable="false"
+			form="@id('e') @load(vm.objForm) @save(vm.objForm, before='doSave')
+			@validator(vm.validator) ">
+			<caption label="@load(e.mp2kbkegiatan.kegiatan)" />
+			<grid>
+				<columns>
+					<column width="30%" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Jenis Limbah" />
+						<vlayout>
+							<combobox selectedItem="@bind(e.jenislimbah)">
+								<comboitem value="Limbah Cair"
+									label="Limbah Cair" />
+								<comboitem value="Limbah Padat"
+									label="Limbah Padat" />
+								<comboitem value="Limbah Gas"
+									label="Limbah Gas" />
+							</combobox>
+							<label style="color:gray"
+								value="@load(vmsgs['jenislimbah'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Status Dalam Kegiatan" />
+						<vlayout>
+							<combobox selectedItem="@bind(e.statuspeserta)">
+								<comboitem value="Ketua Tim"
+									label="Ketua Tim" />
+								<comboitem value="Anggota Tim"
+									label="Anggota Tim" />
+								<comboitem value="Kontributor"
+									label="Kontributor" />
+							</combobox>
+							<label style="color:gray"
+								value="@load(vmsgs['statuspeserta'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Tempat" />
+						<vlayout>
+							<combobox selectedItem="@bind(e.tempat)">
+								<comboitem value="Pemukiman"
+									label="Pemukiman" />
+								<comboitem value="Tempat Kerja"
+									label="Tempat Kerja" />
+								<comboitem value="Tempat Rekreasi"
+									label="Tempat Rekreasi" />
+								<comboitem value="Tempat dan Fasilitas Umum"
+									label="Tempat dan Fasilitas Umum" />
+							</combobox>
+							<label style="color:gray"
+								value="@load(vmsgs['tempat'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Dokumen Bukti Kegiatan" />
+						<vlayout>
+							<hlayout>
+								<button sclass="btn btn-info btn-sm"
+									label="Browse..." upload="true,maxsize=1000"
+									onUpload="@command('doUpload', upEvent=event)"
+									autodisable="self" />
+								<separator orient="vertical" />
+								<label value="@load(vm.docfilename)" />
+							</hlayout>
+							<label style="color:gray"
+								value="@load(vmsgs['media'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Tanggal Kegiatan" />
+						<vlayout>
+							<datebox value="@bind(e.tglkegiatan)"
+								format="dd-MM-yyyy" maxlength="10" cols="12" />
+							<label style="color:gray"
+								value="@load(vmsgs['tglkegiatan'])" />
+						</vlayout>
+					</row>
+				</rows>
+				<foot>
+					<footer />
+					<footer>
+						<button id="btSave" width="100%"
+							iconSclass="z-icon-save" label="Simpan" autodisable="self"
+							sclass="btn btn-primary btn-sm" onClick="@command('doSave')" />
+					</footer>
+				</foot>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d" closable="false">
+			<caption label="Keterangan Parameter Penilaian" />
+			<grid>
+				<columns>
+					<column label="Parameter 1" />
+					<column label="Parameter 2" />
+					<column label="Nilai SKP" align="right" />
+				</columns>
+				<rows>
+					<row>
+						<label
+							value="Limbah Cair" />
+						<label
+							value="Ketua Tim" />
+						<label value="3 SKP" />
+					</row>
+					<row>
+						<label
+							value="Limbah Cair" />
+						<label
+							value="Anggota Tim" />
+						<label value="2 SKP" />
+					</row>
+					<row>
+						<label
+							value="Limbah Cair" />
+						<label
+							value="Kontributor" />
+						<label value="1 SKP" />
+					</row>
+					
+					<row>
+						<label
+							value="Limbah Padat" />
+						<label
+							value="Ketua Tim" />
+						<label value="3 SKP" />
+					</row>
+					<row>
+						<label
+							value="Limbah Padat" />
+						<label
+							value="Anggota Tim" />
+						<label value="2 SKP" />
+					</row>
+					<row>
+						<label
+							value="Limbah Padat" />
+						<label
+							value="Kontributor" />
+						<label value="1 SKP" />
+					</row>
+					
+					<row>
+						<label
+							value="Limbah Gas" />
+						<label
+							value="Ketua Tim" />
+						<label value="3 SKP" />
+					</row>
+					<row>
+						<label
+							value="Limbah Gas" />
+						<label
+							value="Anggota Tim" />
+						<label value="2 SKP" />
+					</row>
+					<row>
+						<label
+							value="Limbah Gas" />
+						<label
+							value="Kontributor" />
+						<label value="1 SKP" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

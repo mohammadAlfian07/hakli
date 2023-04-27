@@ -1,0 +1,75 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winAnggotaRegList" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.AnggotaWaitPayVm')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Daftar Pendaftaran Anggota Menunggu Pembayaran</n:span>
+		</caption>
+		<groupbox mold="3d">
+			<caption label="Pencarian" iconSclass="z-icon-search" />
+			<div class="row">
+				<div class="col">
+					<textbox placeholder="Nama" value="@bind(vm.nama)" onOK="@command('doSearch')"
+						width="100%" maxlength="40" />
+				</div>
+				<div class="col">
+					<combobox id="cbRegion" placeholder="Provinsi" onSelect="@command('doLoadCabang', prov=vm.region)"
+						model="@load(vm.regionModel)" selectedItem="@bind(vm.region)"
+						width="100%">
+						<template name="model" var="region">
+							<comboitem label="@load(region.provname)" />
+						</template>
+					</combobox>
+				</div>
+				<div class="col">
+					<combobox id="cbCabang" placeholder="Cabang"
+						model="@load(vm.cabangModel)" selectedItem="@bind(vm.cabang)"
+						width="100%">
+						<template name="model" var="cabang">
+							<comboitem label="@load(cabang.cabang)" />
+						</template>
+					</combobox>
+				</div>
+				<div class="col">
+					<div class="row">
+						<div class="col">
+							<button label="Telusuri" autodisable="self"
+								iconSclass="z-icon-search" width="100%"
+								sclass="btn btn-success btn-sm" onClick="@command('doSearch')" />
+						</div>
+						<div class="col">
+							<button label="Reset" autodisable="self"
+								iconSclass="z-icon-retweet" width="100%"
+								sclass="btn btn-success btn-sm" onClick="@command('doReset')" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</groupbox>
+		<separator />
+		<div class="row">
+			<div class="col-md-10">
+				<paging id="paging" autohide="true" />
+			</div>
+			<div class="col-md-2" align="right">
+				<label value="${labels.common.totalrecord} :"
+					style="font-weight: bold" />
+				<label value="@load(vm.pageTotalSize)"
+					style="font-weight: bold" />
+			</div>
+		</div>
+		<grid id="grid" emptyMessage="${labels.common.emptymsg}">
+			<columns>
+				<column label="${labels.common.no}" align="right" width="40px" />
+				<column label="${labels.anggota.nama}" />
+				<column label="${labels.anggota.noktp}" />
+				<column label="${labels.anggota.cabang}" />
+				<column label="${labels.anggota.waktureg}" align="center" />
+				<column label="${labels.anggota.vano}" />
+				<column label="${labels.common.action}" align="center" width="70px" />
+			</columns>
+		</grid>
+
+	</window>
+</zk>

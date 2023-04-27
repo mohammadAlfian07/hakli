@@ -1,0 +1,83 @@
+<?page title="${desktop.webApp.appName}" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" ?>
+<?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" ?>
+<?link rel="stylesheet" type="text/css"	href="/mdb/css/mdb.min.css" ?>
+<zk xmlns:n="native">
+
+	<!-- <n:section class="vh-100" style="background-color: #9A616D;"> -->
+	<n:section class="vh-100" style="background-color: #d1d2f0;">
+		<div class="container py-5 h-100"
+			viewModel="@id('vm') @init('com.sds.hakli.viewmodel.AuthenticationVm')">
+			<div
+				class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col col-xl-10">
+					<div class="card" style="border-radius: 1rem;">
+						<div class="row g-0">
+							<div
+								class="col-md-6 col-lg-5 d-none d-md-block">
+								<n:img src="/hakli/img/landing.jpg"
+									alt="login form" class="img-fluid"
+									style="border-radius: 1rem 0 0 1rem;" />
+							</div>
+							<div
+								class="col-md-6 col-lg-7 d-flex align-items-center">
+								<div
+									class="card-body p-4 p-lg-5 text-black">
+
+									<n:form>
+
+										<div
+											class="d-flex align-items-center mb-3 pb-1">
+											<image src="/img/logo_hakli_blue.png" height="55px" />
+										</div>
+
+										<n:h5
+											class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">
+											Aplikasi Manajemen Keanggotaan
+											<separator />
+											<label
+												value="@load(vm.lblMessage)" />
+										</n:h5>
+
+										<div class="form mb-4">
+											<textbox
+												value="@bind(vm.userid)" placeholder="User Id"
+												sclass="form-control form-control-lg" />
+										</div>
+										<div class="form mb-4">
+											<textbox
+												value="@bind(vm.password)" type="password"
+												placeholder="Password"
+												sclass="form-control form-control-lg" />
+										</div>
+
+										<div class="pt-1 mb-4">
+											<button label="Login"
+												onClick="@command('doLogin')"
+												sclass="btn btn-dark btn-lg btn-block" />
+										</div>
+										<!-- 
+											<n:a class="small text-muted" href="#!">Forgot password?</n:a>
+											<n:p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <n:a href="#!"
+											style="color: #393f81;">Register here</n:a></n:p>
+										-->
+										<div align="right">
+											<n:a class="btn btn-success"
+												href="/hakli/anggotareg.zul" role="button">
+												Registrasi
+											</n:a>
+										</div>
+										
+										
+									</n:form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</n:section>
+	<script src="/mdb/js/mdb.min.js"></script>
+</zk>
