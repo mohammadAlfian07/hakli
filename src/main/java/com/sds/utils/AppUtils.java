@@ -3,6 +3,8 @@ package com.sds.utils;
 public class AppUtils {
 
 	public static final String PATH_PHOTO = "/files/photo";
+	public static final String PATH_DOC = "/files/doc";
+	public static final String PATH_IJAZAH = "/files/ijazah";
 	public static final String PATH_P2KB = "/files/p2kb";
 	public static final String PATH_REPORT = "/files/report";
 	

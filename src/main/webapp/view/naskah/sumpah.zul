@@ -1,0 +1,12 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winPayment" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.NaskahVm')"
+		validationMessages="@id('vmsgs')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Naskah</n:span>
+		</caption>
+		
+	</window>
+</zk>

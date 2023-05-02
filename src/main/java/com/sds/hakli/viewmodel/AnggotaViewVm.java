@@ -3,7 +3,9 @@ package com.sds.hakli.viewmodel;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,7 +22,11 @@ import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WebApps;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -34,6 +40,7 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import com.sds.hakli.dao.TanggotaDAO;
 import com.sds.hakli.dao.TpekerjaanDAO;
@@ -47,6 +54,7 @@ import com.sds.utils.db.StoreHibernateUtil;
 
 public class AnggotaViewVm {
 	
+	private org.zkoss.zk.ui.Session zkSession = Sessions.getCurrent();
 	private TanggotaDAO oDao = new TanggotaDAO();
 	private TpendidikanDAO pendidikanDao = new TpendidikanDAO();
 	private TpekerjaanDAO pekerjaanDao = new TpekerjaanDAO();
@@ -93,6 +101,29 @@ public class AnggotaViewVm {
 				periode = data.getPeriodeblawal() + " " + data.getPeriodethawal() + " s/d " + data.getPeriodeblakhir() + " " + data.getPeriodethakhir();
 				row.getChildren().add(new Label(periode));
 				row.getChildren().add(new Label(data.getNoijazah()));
+				Button btProcess = new Button();
+				btProcess.setIconSclass("z-icon-eye");
+				btProcess.setSclass("btn btn-primary btn-sm");
+				btProcess.setAutodisable("self");
+				btProcess.setTooltiptext("Lihat Ijazah");
+				btProcess.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						File file = new File(Executions.getCurrent().getDesktop().getWebApp()
+								.getRealPath(AppUtils.PATH_IJAZAH) + "/" + data.getIjazahlink());
+						if (data.getIjazahlink() != null && data.getIjazahlink().trim().length() > 0 && file.exists()) {
+							Map<String, String> mapDocument = new HashMap<>();
+							mapDocument.put("src", AppUtils.PATH_IJAZAH + "/" + data.getIjazahlink());
+							zkSession.setAttribute("mapDocument", mapDocument);
+							Executions.getCurrent().sendRedirect("/view/docviewer.zul", "_blank");
+						} else {
+							Messagebox.show("Dokumen Ijazah Tidak Tersedia", WebApps.getCurrent().getAppName(), Messagebox.OK,
+									Messagebox.INFORMATION);
+						}
+					}
+				});
+				row.getChildren().add(btProcess);
 			}
 		});
 		

@@ -260,6 +260,7 @@
 							<column label="${labels.pendidikan.minat2}" />
 							<column label="${labels.pendidikan.period}" />
 							<column label="${labels.pendidikan.noijazah}" />
+							<column label="${labels.common.action}" width="70px" />
 						</columns>
 					</grid>
 				</n:div>

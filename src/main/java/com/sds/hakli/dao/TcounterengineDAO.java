@@ -46,6 +46,39 @@ public class TcounterengineDAO {
 		return finalCounter;
 	}
 	
+	public String getVaCounter(String counterName) throws Exception {
+		Integer lastCounter = 0;
+		String strCounter = "";
+		String finalCounter = "";
+		char[] fillUploadid = new char[8];
+		Session session = StoreHibernateUtil.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			Query q = session
+					.createQuery("select lastcounter from Tcounterengine where countername = 'VA" + counterName + "'");
+			lastCounter = (Integer) q.uniqueResult();
+			if (lastCounter != null) {
+				lastCounter++;
+				session.createSQLQuery("update Tcounterengine set lastcounter = lastcounter + 1 where countername = 'VA"
+						+ counterName + "'").executeUpdate();
+			} else {
+				lastCounter = 1;
+				session.createSQLQuery("insert into Tcounterengine values ('VA" + counterName + "', " + lastCounter + ")")
+						.executeUpdate();
+			}
+			transaction.commit();
+			session.close();
+			Arrays.fill(fillUploadid, '0');
+			strCounter = new String(fillUploadid) + lastCounter;
+			finalCounter = counterName
+					+ strCounter.substring(strCounter.length()-8, strCounter.length());
+		} catch (Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+		}
+		return finalCounter;
+	}
+	
 	public String getInvoiceCounter() throws Exception {
 		Integer lastCounter = 0;
 		String counterName = "";

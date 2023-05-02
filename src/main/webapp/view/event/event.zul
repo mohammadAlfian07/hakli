@@ -1,0 +1,11 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winEvent" border="none"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.EventVm')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Daftar Events</n:span>
+		</caption>
+		<div id="divCards" />
+	</window>
+</zk>

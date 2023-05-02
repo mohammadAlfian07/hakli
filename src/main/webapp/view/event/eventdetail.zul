@@ -1,0 +1,111 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winEventDetail" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.EventDetailVm')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Detail Event</n:span>
+		</caption>
+		<button label="Kembali Ke Daftar Events"
+			sclass="btn btn-primary btn-sm" autodisable="self"
+			onClick="@command('doBack')" />
+		<separator />
+		<div class="row">
+			<div class="col">
+				<groupbox mold="3d">
+					<caption label="Pencarian"
+						iconSclass="z-icon-search" />
+					<grid>
+						<columns>
+							<column />
+						</columns>
+						<rows>
+							<row>
+								<textbox placeholder="Nama"
+									value="@bind(vm.nama)" onOK="@command('doSearch')" width="100%"
+									maxlength="40" />
+							</row>
+							<row>
+								<textbox placeholder="E-Mail"
+									value="@bind(vm.email)" onOK="@command('doSearch')"
+									width="100%" maxlength="40" />
+							</row>
+							<row>
+								<textbox placeholder="Nomor VA"
+									value="@bind(vm.vano)" onOK="@command('doSearch')"
+									width="100%" maxlength="40" />
+							</row>
+							<row>
+								<combobox id="cbStatus" placeholder="Status Pembayaran"
+									selectedItem="@bind(vm.status)" width="50%">
+									<comboitem value="Y" label="Sudah Dibayar" />
+									<comboitem value="N" label="Belum Dibayar" />
+								</combobox>
+							</row>
+						</rows>
+						<foot>
+							<footer>
+								<div class="row">
+									<div class="col">
+										<div class="row">
+											<div class="col">
+												<button label="Telusuri"
+													autodisable="self" iconSclass="z-icon-search" width="100%"
+													sclass="btn btn-success btn-sm"
+													onClick="@command('doSearch')" />
+											</div>
+											<div class="col">
+												<button label="Reset"
+													autodisable="self" iconSclass="z-icon-retweet" width="100%"
+													sclass="btn btn-success btn-sm"
+													onClick="@command('doReset')" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</footer>
+						</foot>
+					</grid>
+
+				</groupbox>
+			</div>
+			<div class="col">
+				<groupbox mold="3d">
+					<caption label="Dashoard Pembayaran"
+						iconSclass="z-icon-line-chart" />
+					<charts id="chart" type="column"
+						title="Realisasi Pemasukan" />
+				</groupbox>
+			</div>
+		</div>
+
+		<separator />
+		<div class="row">
+			<div class="col-md-10">
+				<paging id="paging" autohide="true" />
+			</div>
+			<div class="col-md-2" align="right">
+				<label value="${labels.common.totalrecord} :"
+					style="font-weight: bold" />
+				<label value="@load(vm.pageTotalSize)"
+					style="font-weight: bold" />
+			</div>
+		</div>
+		<grid id="grid" emptyMessage="${labels.common.emptymsg}">
+			<columns>
+				<column label="${labels.common.no}" align="right"
+					width="40px" />
+				<column label="${labels.anggota.nama}" />
+				<column label="${labels.anggota.email}" />
+				<column label="Waktu Registrasi" align="center" />
+				<column label="Nomor VA" align="center" />
+				<column label="VA Jatuh Tempo" align="center" />
+				<column label="Status Pembayaran" align="center" />
+				<column label="Waktu Pembayaran" align="center" />
+				<column label="${labels.common.action}" align="center"
+					width="70px" />
+			</columns>
+		</grid>
+
+	</window>
+</zk>

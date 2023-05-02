@@ -88,6 +88,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<include src="/footer.zul" />
 	</n:section>
 	<script src="/mdb/js/mdb.min.js"></script>
 </zk>

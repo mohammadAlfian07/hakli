@@ -33,6 +33,8 @@ public class AdmInitializationVm {
 	@Wire
 	private Div divMenuAnggota;
 	@Wire
+	private Div divMenuEvent;
+	@Wire
 	private Div divContent;
 	
 	@AfterCompose
@@ -55,6 +57,8 @@ public class AdmInitializationVm {
 				divMenu = divMenuAdmin;
 			else if (menu.equals("anggota"))
 				divMenu = divMenuAnggota;
+			else if (menu.equals("event"))
+				divMenu = divMenuEvent;
 			
 			((A) divMenu.getChildren().get(index)).setSclass("list-group-item list-group-item-action py-2 ripple active");
 			if (currentmenuidx != null && (currentmenuidx.compareTo(index) != 0 || 
@@ -64,6 +68,8 @@ public class AdmInitializationVm {
 					divMenuPrev = divMenuAdmin;
 				else if (currentmenu.equals("anggota"))
 					divMenuPrev = divMenuAnggota;
+				else if (currentmenu.equals("event"))
+					divMenuPrev = divMenuEvent;
 				
 				((A) divMenuPrev.getChildren().get(currentmenuidx)).setSclass("list-group-item list-group-item-action py-2 ripple");
 			}

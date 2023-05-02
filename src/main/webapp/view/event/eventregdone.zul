@@ -1,0 +1,56 @@
+<?page title="${desktop.webApp.appName}" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" ?>
+<?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" ?>
+<?link rel="stylesheet" type="text/css"	href="/mdb/css/mdb.min.css" ?>
+<zk xmlns:n="native">
+	<window id="winEventregdone"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.EventRegdoneVm')">
+		<!-- Section: Design Block -->
+		<n:section class="text-center">
+			<!-- Background image -->
+			<!-- 
+			<div class="p-5 bg-image"
+				style="
+        background-image: url('/hakli/img/sumpahprofesi.png');
+        height: 300px;
+        ">
+			</div>
+			 -->
+			<!-- Background image -->
+			<n:br />
+			<n:br />
+			<n:br />
+			<n:br />
+			<n:br />
+			<div class="card mx-0 mx-md-0 shadow-5-strong"
+				style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+        
+        <image src="/img/sumpahprofesi.png" width="100%" />
+
+				<div class="card-body py-5 px-md-5">
+
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-8">
+
+							<n:form>
+
+								<div id="divInfo"
+									class="note note-warning mb-3">
+								</div>
+
+							</n:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</n:section>
+		<!-- Section: Design Block -->
+		
+		<n:br/>
+		<include src="/footer.zul" />
+	</window>
+</zk>

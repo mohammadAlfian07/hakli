@@ -1,0 +1,108 @@
+<?page title="${desktop.webApp.appName}" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" ?>
+<?link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" ?>
+<?link rel="stylesheet" type="text/css"	href="/mdb/css/mdb.min.css" ?>
+<zk xmlns:n="native">
+	<!-- Footer -->
+	<n:footer class="text-center text-lg-start text-white"
+		style="background-color: #1c2331">
+		<!-- Grid container -->
+		<div class="container p-4 pb-0">
+			<!-- Section: Links -->
+			<n:section class="">
+				<!--Grid row-->
+				<div class="row">
+					<!-- Grid column -->
+					<div
+						class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+						<image src="/img/logohakli.png" height="70px" />
+					</div>
+					<!-- Grid column -->
+
+					<n:hr class="w-100 clearfix d-md-none" />
+
+					<!-- Grid column -->
+					<n:hr class="w-100 clearfix d-md-none" />
+
+					<!-- Grid column -->
+					<div
+						class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+						<n:h6
+							class="text-uppercase mb-4 font-weight-bold">
+							Kontak
+						</n:h6>
+						<n:p>
+							<n:i class="fas fa-home mr-3"></n:i>
+							Equity Tower 49 Floor Jalan Jenderal
+							Sudirman Kavling 52-53 SCBD Jakarta 12190,
+							Indonesia 11630
+						</n:p>
+						<n:p>
+							<n:i class="fas fa-envelope mr-3"></n:i>
+							sekertariat_pp@hakli.or.id
+						</n:p>
+						<n:p>
+							<n:i class="fas fa-phone mr-3"></n:i>
+							+6221 29651162
+						</n:p>
+					</div>
+					<!-- Grid column -->
+				</div>
+				<!--Grid row-->
+			</n:section>
+			<!-- Section: Links -->
+
+			<n:hr class="my-3" />
+
+			<!-- Section: Copyright -->
+			<n:section class="p-3 pt-0">
+				<div class="row d-flex align-items-center">
+					<!-- Grid column -->
+					<div
+						class="col-md-7 col-lg-8 text-center text-md-start">
+						<!-- Copyright -->
+						<div class="p-3">
+							© 2023 Copyright:
+							<n:a class="text-white"
+								href="https://pphakli.org/">
+								HAKLI
+							</n:a>
+						</div>
+						<!-- Copyright -->
+					</div>
+					<!-- Grid column -->
+
+					<!-- Grid column -->
+					<!-- 
+						<div
+						class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+						<n:a
+						class="btn btn-outline-light btn-floating m-1 text-white" role="button">
+						<n:i class="fab fa-facebook-f"></n:i>
+						</n:a>
+						
+						<n:a
+						class="btn btn-outline-light btn-floating m-1 text-white" role="button">
+						<n:i class="fab fa-twitter"></n:i>
+						</n:a>
+						
+						<n:a
+						class="btn btn-outline-light btn-floating m-1 text-white" role="button">
+						<n:i class="fab fa-google"></n:i>
+						</n:a>
+						
+						<n:a
+						class="btn btn-outline-light btn-floating m-1 text-white" role="button">
+						<n:i class="fab fa-instagram"></n:i>
+						</n:a>
+						</div>
+					-->
+					<!-- Grid column -->
+				</div>
+			</n:section>
+			<!-- Section: Copyright -->
+		</div>
+		<!-- Grid container -->
+	</n:footer>
+	<!-- Footer -->
+</zk>

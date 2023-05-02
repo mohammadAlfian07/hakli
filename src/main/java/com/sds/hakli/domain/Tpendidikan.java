@@ -39,6 +39,8 @@ public class Tpendidikan {
 	
 	private String noijazah;
 	
+	private String ijazahlink;
+	
 	private Date lastupdated;
 	
 	private String updatedby;
@@ -85,6 +87,16 @@ public class Tpendidikan {
 		this.createdby = createdby;
 	}
 
+	
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
+	public String getIjazahlink() {
+		return ijazahlink;
+	}
+
+	public void setIjazahlink(String ijazahlink) {
+		this.ijazahlink = ijazahlink;
+	}
+
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getLastupdated() {
 		return lastupdated;
@@ -102,6 +114,7 @@ public class Tpendidikan {
 		this.updatedby = updatedby;
 	}
 	
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
 	public String getPeminatan1() {
 		return peminatan1;
 	}
@@ -110,6 +123,7 @@ public class Tpendidikan {
 		this.peminatan1 = peminatan1;
 	}
 
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
 	public String getPeminatan2() {
 		return peminatan2;
 	}
@@ -118,6 +132,7 @@ public class Tpendidikan {
 		this.peminatan2 = peminatan2;
 	}
 
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
 	public String getPeriodethawal() {
 		return periodethawal;
 	}
@@ -126,6 +141,7 @@ public class Tpendidikan {
 		this.periodethawal = periodethawal;
 	}
 
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
 	public String getPeriodeblawal() {
 		return periodeblawal;
 	}
@@ -134,6 +150,7 @@ public class Tpendidikan {
 		this.periodeblawal = periodeblawal;
 	}
 
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
 	public String getPeriodethakhir() {
 		return periodethakhir;
 	}
@@ -142,6 +159,7 @@ public class Tpendidikan {
 		this.periodethakhir = periodethakhir;
 	}
 
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
 	public String getPeriodeblakhir() {
 		return periodeblakhir;
 	}
