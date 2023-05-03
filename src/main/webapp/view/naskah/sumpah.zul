@@ -13,12 +13,12 @@
 				<columns>
 					<column label="${labels.common.no}" align="right"
 						width="40px" />
-					<column label="Uraian" width="300px" />
-					<column label="Islam" />
-					<column label="Kristen Khatolik" />
-					<column label="Kristen Protestan" />
-					<column label="Hindu" />
-					<column label="Budha" />
+					<column label="Uraian" width="350px" />
+					<column label="Islam" align="center"/>
+					<column label="Kristen Khatolik" align="center"/>
+					<column label="Kristen Protestan" align="center"/>
+					<column label="Hindu" align="center"/>
+					<column label="Budha" align="center"/>
 				</columns>
 				<rows>
 					<row>
@@ -26,23 +26,23 @@
 						<label
 							value="Surat Pernyataan Telah Mengucapkan Sumpah Profesi Tenaga Sanitasi Lingkungan" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download" 
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='islam')" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download"
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='khatolik')" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download"
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='protestan')" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download"
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='hindu')" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download"
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='budha')" />
 					</row>
@@ -56,8 +56,8 @@
 				<columns>
 					<column label="${labels.common.no}" align="right"
 						width="40px" />
-					<column label="Uraian" width="300px" />
-					<column label="Aksi" />
+					<column label="Uraian" />
+					<column label="Aksi" width="200px" align="center"/>
 				</columns>
 				<rows>
 					<row>
@@ -65,7 +65,7 @@
 						<label
 							value="Pernyataan Mematuhi Dan Melaksanakan Ketentuan Etika Profesi Tenaga Sanitasi Lingkungan" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download"
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='etik')" />
 					</row>
@@ -80,8 +80,8 @@
 				<columns>
 					<column label="${labels.common.no}" align="right"
 						width="40px" />
-					<column label="Uraian" width="300px" />
-					<column label="Aksi" />
+					<column label="Uraian"/>
+					<column label="Aksi" width="200px" align="center"/>
 				</columns>
 				<rows>
 					<row>
@@ -89,7 +89,7 @@
 						<label
 							value="Pernyataan Kesediaan Untuk Mengikuti Sertifikasi Kompetensi" />
 						<button label="Download" autodisable="self"
-							iconSclass="z-icon-download" width="100%"
+							iconSclass="z-icon-download"
 							sclass="btn btn-success btn-sm"
 							onClick="@command('doDownload', arg='sertifikasi')" />
 					</row>
