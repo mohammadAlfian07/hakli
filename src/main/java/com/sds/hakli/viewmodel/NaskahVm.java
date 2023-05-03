@@ -68,11 +68,13 @@ public class NaskahVm {
 			}
 
 			parameters.put("FOTO",
-					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/" + obj.getPhotolink()));
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath(AppUtils.PATH_PHOTO + "/" + obj.getPhotolink()));
 			parameters.put("TTD_MENGANGKATSUMPAH",
 					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_mengangkatsumpah.png"));
 			parameters.put("TTD_SAKSI",
 					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_saksi.jpg"));
+			parameters.put("LOGO",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("img/hakli.png"));
 
 			zkSession.setAttribute("parameters", parameters);
 			zkSession.setAttribute("reportPath", Executions.getCurrent().getDesktop().getWebApp()
