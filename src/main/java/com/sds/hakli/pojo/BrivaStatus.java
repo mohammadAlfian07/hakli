@@ -7,6 +7,7 @@ public class BrivaStatus {
 	private String institutionCode;
 	private String BrivaNo;
 	private String CustCode;
+	@JsonbProperty("Nama")
 	private String Nama;
 	private String Amount;
 	private String Keterangan;

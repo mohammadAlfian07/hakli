@@ -50,11 +50,11 @@ public class VaStatusVm {
 					obj = briapi.getBriva(briapiToken.getAccess_token(), "j104408", cid, custcode);
 					System.out.println("nama : " + obj.getData().getNama());
 					if (obj.getStatus()) {
-//						ObjectMapper mapper = new ObjectMapper();
-//						BrivaStatus data = mapper.readValue(mapper.writeValueAsString(obj.getData()),
-//								new TypeReference<BrivaStatus>() {
-//								});
-//						obj.setData(data);
+						ObjectMapper mapper = new ObjectMapper();
+						BrivaStatus data = mapper.readValue(mapper.writeValueAsString(obj.getData()),
+								new TypeReference<BrivaStatus>() {
+								});
+						obj.setData(data);
 						gbResult.setVisible(true);
 						vano = null;
 					} else 
