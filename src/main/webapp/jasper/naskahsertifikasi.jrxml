@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="naskahsertifikasi" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a188592-b153-4e09-8bd1-8b5a25138ae2">
 	<property name="ireport.zoom" value="1.9487171000000014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="679"/>
+	<property name="ireport.y" value="330"/>
 	<parameter name="FOTO" class="java.lang.String"/>
 	<field name="nama" class="java.lang.String"/>
 	<field name="tempatlahir" class="java.lang.String"/>
@@ -44,7 +44,7 @@ Website : www.hakli.or.id E-mail: sekertariat_pp@hakli.or.id ]]></text>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="220" splitType="Stretch">
+		<band height="478" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="111" width="553" height="15" uuid="463319ab-cd64-475d-9682-2db2b9be9209"/>
 				<textFieldExpression><![CDATA["Nama                       				: " + $F{nama}]]></textFieldExpression>
@@ -72,35 +72,22 @@ Website : www.hakli.or.id E-mail: sekertariat_pp@hakli.or.id ]]></text>
 (Khusus bagi S.KM peminatan Kesling dan S.KL yang lulus setelah Oktober 2014 dan tidak berlatar belakang pendidikan
 vokasi)]]></text>
 			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="316" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="553" height="61" uuid="a6e68d7c-1909-42a5-9761-a5e5668ff362"/>
-				<textElement textAlignment="Justified"/>
+				<reportElement x="1" y="185" width="553" height="40" uuid="c20634a2-0957-427e-9aaa-aaf64b280d60"/>
 				<text><![CDATA[Menyatakan dengan sesungguhnya bahwa saya bersedia untuk mengikuti Sertifikasi Kompetensi sebagai kualifikasi dari
 kelengkapan mendapatkan STR Tenaga Sanitasi Lingkungan (Sanitarian) dan atas segala hal yang terkait dalam
 pernyataan ini menjadi ketentuan sarat yang wajib dipatuhi.
 ]]></text>
 			</staticText>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="212" splitType="Stretch">
-			<image>
-				<reportElement x="50" y="-205" width="137" height="151" uuid="af691afd-10b4-43f6-aeba-60371e4c3c2c"/>
-				<imageExpression><![CDATA[$P{FOTO}]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="0" y="-249" width="555" height="15" uuid="6c04593c-9244-48a9-9c76-f95e1267d2bc"/>
+				<reportElement x="0" y="242" width="555" height="15" uuid="12625749-ec80-44af-b658-09edb9eb7383"/>
 				<text><![CDATA[Demikian pernyataan ini saya buat dengan sungguh-sungguh, penuh kesadaran dan penuh rasa tanggung jawab.
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="368" y="-205" width="187" height="151" uuid="b7dee91f-9eec-4a55-bf9c-2379fb21a9f7"/>
+				<reportElement x="368" y="279" width="187" height="151" uuid="7183c9a7-2d25-42c4-a48b-2e6b6e014e94"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Jakarta, 28 Januari 2023
+				<text><![CDATA[.........................., ...............................20
 Yang bersumpah
 
 
@@ -112,12 +99,10 @@ materai 10000
 GALUH TRI TUNGGAL DEWI A.Md.Kes.
 No. KTA :317114472]]></text>
 			</staticText>
+			<image>
+				<reportElement x="58" y="279" width="113" height="151" uuid="a9a1d745-9203-4780-9070-29e6980fe631"/>
+				<imageExpression><![CDATA[$P{FOTO}]]></imageExpression>
+			</image>
 		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
+	</columnHeader>
 </jasperReport>

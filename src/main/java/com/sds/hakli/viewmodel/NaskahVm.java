@@ -36,7 +36,7 @@ public class NaskahVm {
 			List<Tanggota> objList = new ArrayList<>();
 			objList.add(obj);
 			zkSession.setAttribute("objList", objList);
-			
+
 			String filepath = "naskahsumpah.jasper";
 			String filepath2 = "naskahsumpah2.jasper";
 			if (arg.equals("islam")) {
@@ -66,16 +66,23 @@ public class NaskahVm {
 				filepath = "naskahsertifikasi.jasper";
 				filepath2 = "";
 			}
-			
-			parameters.put("FOTO", Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/" + obj.getPhotolink()));
-			parameters.put("TTD_MENGANGKATSUMPAH", Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_mengangkatsumpah.png"));
-			parameters.put("TTD_SAKSI", Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_saksi.jpg"));
-			
+
+			parameters.put("FOTO",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/" + obj.getPhotolink()));
+			parameters.put("TTD_MENGANGKATSUMPAH",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_mengangkatsumpah.png"));
+			parameters.put("TTD_SAKSI",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_saksi.jpg"));
+
 			zkSession.setAttribute("parameters", parameters);
 			zkSession.setAttribute("reportPath", Executions.getCurrent().getDesktop().getWebApp()
 					.getRealPath(AppUtils.PATH_JASPER + "/" + filepath));
-			zkSession.setAttribute("reportPath2", Executions.getCurrent().getDesktop().getWebApp()
-					.getRealPath(AppUtils.PATH_JASPER + "/" + filepath2));
+
+			if (filepath2.trim().length() > 0) {
+				zkSession.setAttribute("reportPath2", Executions.getCurrent().getDesktop().getWebApp()
+						.getRealPath(AppUtils.PATH_JASPER + "/" + filepath2));
+			}
+
 			Executions.getCurrent().sendRedirect("/view/jasperviewer.zul", "_blank");
 		} catch (Exception e) {
 			e.printStackTrace();
