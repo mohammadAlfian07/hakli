@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="naskahsumpah2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49860e0c-7f12-4d79-a659-7d29003d4f62">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="110"/>
+	<parameter name="SALAMNASKAH" class="java.lang.String"/>
+	<parameter name="TTD_MENGANGKATSUMPAH" class="java.lang.String"/>
+	<parameter name="TTD_SAKSI" class="java.lang.String"/>
+	<parameter name="FOTO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="99" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="93" width="555" height="1" uuid="a8357f1f-cb3d-4d8b-ac23-0a361d742d3a"/>
+			</line>
+			<staticText>
+				<reportElement x="102" y="1" width="340" height="90" uuid="c31f8625-a9b4-41e7-bc55-025774361d85"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PENGURUS PUSAT
+HIMPUNAN AHLI KESEHATAN LINGKUNGAN INDONESIA
+(INDONESIAN ASSOCIATION OF ENVIRONMENTAL HEALTH)
+Sekretariat : Equity Tower 49 Floor Jalan Jenderal Sudirman
+Kavling 52 – 53 SCBD Jakarta 12190 Indonesia
+Phone +62 21 2965 1162 Fax +62 21 2965 1222 WA : +62 812 8379 9257
+Website : www.hakli.or.id E-mail: sekertariat_pp@hakli.or.id ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="91" width="555" height="1" uuid="20df5ba9-f080-4730-be6b-e03d71f5bde5"/>
+			</line>
+			<line>
+				<reportElement x="0" y="94" width="555" height="1" uuid="637b9e77-7b38-482a-98da-b397e3f6c1ac"/>
+			</line>
+			<line>
+				<reportElement x="0" y="96" width="555" height="1" uuid="f26ba618-8229-4f5e-a695-a73382520442"/>
+			</line>
+			<image>
+				<reportElement x="1" y="7" width="101" height="84" uuid="30bc4629-987a-414c-b432-78ae8f9d4ca9"/>
+				<imageExpression><![CDATA["C:\\Users\\SDD-SWD\\Pictures\\hakli-min.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="575" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="18" width="554" height="32" uuid="dfa5ce5c-5d87-4417-89a9-8c90a1c72125"/>
+				<text><![CDATA[Sumpah ini saya ikrarkan dengan sungguh-sungguh penuh kesadaran dan penuh rasa tanggung jawab dengan
+mempertaruhkan kehormatan saya sebagai Tenaga Sanitasi Lingkungan (Sanitarian).
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="51" width="554" height="15" uuid="58c8c5e2-8e7e-42f8-81a5-d2dc5b48dbe8"/>
+				<textFieldExpression><![CDATA['"' + $P{SALAMNASKAH} + '"' + " :"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="183" y="262" width="181" height="103" uuid="00a9bc38-2398-428a-b1e5-c9d9f32069d9"/>
+				<imageExpression><![CDATA[$P{TTD_SAKSI}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="93" width="144" height="15" uuid="86017577-62b2-4d54-9763-3d519b05ad0a"/>
+				<text><![CDATA[Yang mengangkat sumpah]]></text>
+			</staticText>
+			<image>
+				<reportElement x="208" y="400" width="136" height="151" uuid="45f72994-354d-4811-a2e6-3fc64fb07f66"/>
+				<imageExpression><![CDATA[$P{FOTO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="368" y="90" width="186" height="151" uuid="77aec7dd-3a93-49be-adef-77af764910b9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jakarta, 28 Januari 2023
+Yang bersumpah
+
+
+materai 10000
+
+
+
+
+GALUH TRI TUNGGAL DEWI A.Md.Kes.
+No. KTA :317114472]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="107" width="181" height="103" uuid="9fc6e22a-484f-4000-b8b9-1b2660d57b8c"/>
+				<imageExpression><![CDATA[$P{TTD_MENGANGKATSUMPAH}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="184" y="248" width="180" height="15" uuid="c5d3761b-1641-456b-a04f-ed0e864491e7"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Saksi/Rohaniwan :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="364" width="180" height="30" uuid="88cf6d29-bad8-4ce5-ba30-3f6a162d33f4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[(Qowiyun Awal, MA)
+NIP.197902222001121003]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="209" width="180" height="34" uuid="b141aefd-72a9-452d-ba3b-772daa39a3bd"/>
+				<text><![CDATA[Prof. Dr. H. Arif Sumantri, SKM. M.Kes.
+No.KTA:317410895]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnFooter>
+		<band height="30" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch"/>
+	</summary>
+</jasperReport>

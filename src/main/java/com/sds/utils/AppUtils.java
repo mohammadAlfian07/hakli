@@ -7,6 +7,7 @@ public class AppUtils {
 	public static final String PATH_IJAZAH = "/files/ijazah";
 	public static final String PATH_P2KB = "/files/p2kb";
 	public static final String PATH_REPORT = "/files/report";
+	public static final String PATH_JASPER = "/jasper";
 	
 	public static final int PAGESIZE = 20;
 	public static final String USERS_PASSWORD_DEFAULT = "123456";
