@@ -1,57 +1,92 @@
 package com.sds.hakli.viewmodel;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.ValidationContext;
-import org.zkoss.bind.Validator;
 import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.validator.AbstractValidator;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.WebApps;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.Selectors;
-import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Div;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Row;
-import org.zkoss.zul.RowRenderer;
-import org.zkoss.zul.Separator;
-import org.zkoss.zul.Window;
 
-import com.sds.hakli.dao.McabangDAO;
-import com.sds.hakli.dao.MprovinsiDAO;
-import com.sds.hakli.domain.Mcabang;
-import com.sds.hakli.domain.Mprovinsi;
-import com.sds.hakli.domain.Muser;
-import com.sds.utils.db.StoreHibernateUtil;
+import com.sds.hakli.domain.Tanggota;
+import com.sds.utils.AppUtils;
 
 public class NaskahVm {
-	
+	private org.zkoss.zk.ui.Session zkSession = Sessions.getCurrent();
+	private Tanggota obj;
+
 	@AfterCompose
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireComponents(view, this, false);
-		
-		
+		obj = (Tanggota) zkSession.getAttribute("anggota");
+
 	}
-	
-	
+
+	@Command
+	public void doDownload(@BindingParam("arg") String arg) {
+		try {
+			Map<String, Object> parameters = new HashMap<>();
+			List<Tanggota> objList = new ArrayList<>();
+			objList.add(obj);
+			zkSession.setAttribute("objList", objList);
+
+			String filepath = "naskahsumpah.jasper";
+			String filepath2 = "naskahsumpah2.jasper";
+			if (arg.equals("islam")) {
+				parameters.put("SALAMNASKAH", "Semoga Allah Subhanahu wa ta’ala memberikan kekuatan kepada saya");
+				parameters.put("SUMPAHAGAMA", "Demi Allah saya bersumpah");
+				parameters.put("AGAMA", "Islam");
+			} else if (arg.equals("khatolik")) {
+				parameters.put("SALAMNASKAH", "Kiranya Tuhan menolong saya");
+				parameters.put("SUMPAHAGAMA", "Demi Tuhan saya berjanji");
+				parameters.put("AGAMA", "Khatolik");
+			} else if (arg.equals("protestan")) {
+				parameters.put("SALAMNASKAH", "Kiranya Tuhan menolong saya");
+				parameters.put("SUMPAHAGAMA", "Demi Tuhan saya berjanji");
+				parameters.put("AGAMA", "Protestan");
+			} else if (arg.equals("hindu")) {
+				parameters.put("SALAMNASKAH", "Om Santi Santi Santi Om");
+				parameters.put("SUMPAHAGAMA", "Om Attah Paramawisesa saya bersumpah");
+				parameters.put("AGAMA", "Hindu");
+			} else if (arg.equals("budha")) {
+				parameters.put("SALAMNASKAH", "Om Santi Santi Santi Om");
+				parameters.put("SUMPAHAGAMA", "Demi yang Tiratana saya berjanji");
+				parameters.put("AGAMA", "Budha");
+			} else if (arg.equals("etik")) {
+				filepath = "naskahetika.jasper";
+				filepath2 = "naskahetika2.jasper";
+			} else if (arg.equals("sertifikasi")) {
+				filepath = "naskahsertifikasi.jasper";
+				filepath2 = "";
+			}
+
+			parameters.put("FOTO",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/" + obj.getPhotolink()));
+			parameters.put("TTD_MENGANGKATSUMPAH",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_mengangkatsumpah.png"));
+			parameters.put("TTD_SAKSI",
+					Executions.getCurrent().getDesktop().getWebApp().getRealPath("images/ttd_saksi.jpg"));
+
+			zkSession.setAttribute("parameters", parameters);
+			zkSession.setAttribute("reportPath", Executions.getCurrent().getDesktop().getWebApp()
+					.getRealPath(AppUtils.PATH_JASPER + "/" + filepath));
+
+			if (filepath2.trim().length() > 0) {
+				zkSession.setAttribute("reportPath2", Executions.getCurrent().getDesktop().getWebApp()
+						.getRealPath(AppUtils.PATH_JASPER + "/" + filepath2));
+			}
+
+			Executions.getCurrent().sendRedirect("/view/jasperviewer.zul", "_blank");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
