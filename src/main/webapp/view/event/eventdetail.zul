@@ -91,7 +91,7 @@
 					style="font-weight: bold" />
 			</div>
 		</div>
-		<grid id="grid" emptyMessage="${labels.common.emptymsg}">
+		<grid id="grid" emptyMessage="${labels.common.emptymsg}" sizedByContent="true">
 			<columns>
 				<column label="${labels.common.no}" align="right"
 					width="40px" />

@@ -50,7 +50,7 @@ public class TcounterengineDAO {
 		Integer lastCounter = 0;
 		String strCounter = "";
 		String finalCounter = "";
-		char[] fillUploadid = new char[8];
+		char[] fillUploadid = new char[5];
 		Session session = StoreHibernateUtil.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
@@ -71,7 +71,7 @@ public class TcounterengineDAO {
 			Arrays.fill(fillUploadid, '0');
 			strCounter = new String(fillUploadid) + lastCounter;
 			finalCounter = counterName
-					+ strCounter.substring(strCounter.length()-8, strCounter.length());
+					+ strCounter.substring(strCounter.length()-5, strCounter.length());
 		} catch (Exception e) {
 			transaction.rollback();
 			e.printStackTrace();
