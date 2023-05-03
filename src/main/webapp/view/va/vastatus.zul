@@ -1,10 +1,81 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk xmlns:n="native">
-	<window id="winMutasi" border="normal">
+	<window id="winMutasi" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.VaStatusVm')">
 		<caption>
 			<n:i class="fas fa-list"></n:i>
-			<n:span>Mutasi</n:span>
+			<n:span>Cek Status Data Virtual Account</n:span>
 		</caption>
-		<n:h3>On Progress Development</n:h3>
+		<groupbox mold="3d">
+			<caption label="Input Nomor Virtual Account" />
+			<div class="row">
+				<div class="col">
+					<textbox value="@bind(vm.vano)" maxlength="20"
+						cols="20" />
+				</div>
+				<div class="col">
+					<button label="Cek" autodisable="self"
+						iconSclass="z-icon-search" sclass="btn btn-success btn-sm"
+						onClick="@command('doSubmit')" />
+					<button label="Reset" autodisable="self"
+						iconSclass="z-icon-search" sclass="btn btn-success btn-sm"
+						onClick="@command('doReset')" />
+				</div>
+			</div>
+		</groupbox>
+		<n:hr />
+		<groupbox id="gbResult" mold="3d" visible="false">
+			<caption label="Data Hasil Pengecekan Virtual Account" />
+			<n:table class="table table-sm table-striped mb-0">
+				<n:tr>
+					<n:td>
+						<label value="Nomor Virtual Account" />
+					</n:td>
+					<n:td>
+						<label value="@load(vm.obj.data.brivaNo)" />
+					</n:td>
+				</n:tr>
+				<n:tr>
+					<n:td>
+						<label value="Nama" />
+					</n:td>
+					<n:td>
+						<label value="@load(vm.obj.data.nama)" />
+					</n:td>
+				</n:tr>
+				<n:tr>
+					<n:td>
+						<label value="Nominal Tagihan" />
+					</n:td>
+					<n:td>
+						<label value="@load(vm.obj.data.amount)" />
+					</n:td>
+				</n:tr>
+				<n:tr>
+					<n:td>
+						<label value="Keterangan" />
+					</n:td>
+					<n:td>
+						<label value="@load(vm.obj.data.keterangan)" />
+					</n:td>
+				</n:tr>
+				<n:tr>
+					<n:td>
+						<label value="Status Bayar" />
+					</n:td>
+					<n:td>
+						<label value="@load(vm.obj.data.statusBayar)" />
+					</n:td>
+				</n:tr>
+				<n:tr>
+					<n:td>
+						<label value="VA Expired" />
+					</n:td>
+					<n:td>
+						<label value="@load(vm.obj.data.expiredDate)" />
+					</n:td>
+				</n:tr>
+			</n:table>
+		</groupbox>
 	</window>
 </zk>
