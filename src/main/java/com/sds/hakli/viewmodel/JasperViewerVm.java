@@ -70,6 +70,8 @@ public class JasperViewerVm {
 								(java.util.Collection) objList));
 				jasperPrintList.add(jasperPrint2);
 			}
+			
+			System.out.println("TOTAL PAGE : " + jasperPrintList.size());
 
 			JRPdfExporter exporter = new JRPdfExporter();
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, jasperPrintList);
