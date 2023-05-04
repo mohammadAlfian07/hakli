@@ -2,9 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="naskahsumpah" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e09c74e-ba1b-4239-a24e-7de27df87915">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="261"/>
+	<property name="ireport.y" value="102"/>
 	<parameter name="SUMPAHAGAMA" class="java.lang.String"/>
 	<parameter name="AGAMA" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.String"/>
 	<field name="nama" class="java.lang.String"/>
 	<field name="tempatlahir" class="java.lang.String"/>
 	<field name="tgllahir" class="java.util.Date"/>
@@ -39,8 +40,8 @@ Website : www.hakli.or.id E-mail: sekertariat_pp@hakli.or.id ]]></text>
 				<reportElement x="0" y="95" width="555" height="1" uuid="78d21b47-9651-4d48-a366-e5643d091262"/>
 			</line>
 			<image>
-				<reportElement x="1" y="6" width="101" height="84" uuid="54668b4f-f832-4bf9-80b5-0215d101912a"/>
-				<imageExpression><![CDATA["C:\\Users\\SDD-SWD\\Pictures\\hakli-min.png"]]></imageExpression>
+				<reportElement x="1" y="6" width="82" height="71" uuid="54668b4f-f832-4bf9-80b5-0215d101912a"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -60,11 +61,6 @@ Nomor : 1742/SP/PP-HAKLI/I/2023]]></text>
 	</columnHeader>
 	<detail>
 		<band height="491" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="555" height="33" uuid="6b75a035-cd1a-42cb-80be-181311b15bce"/>
-				<text><![CDATA[Pada hari ini Sabtu, tanggal 28 bulan Januari tahun 2023, bertempat di Institut Kesehatan dan Teknologi Al Insyirah ;
-saya, yang bertanda tangan di bawah ini:]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="0" y="50" width="288" height="15" uuid="14b188e2-a0a1-46bf-bf8f-9a23dfd300c8"/>
 				<text><![CDATA[Nama							:]]></text>
@@ -109,24 +105,20 @@ Nomor 36 Tahun 2014 tentang Tenaga Kesehatan, dengan lafal sumpah sebagai beriku
 			</textField>
 			<staticText>
 				<reportElement x="29" y="194" width="526" height="229" uuid="a35230b2-80d9-474a-b201-7f81c807c421"/>
-				<text><![CDATA[Saya akan melaksanakan tugas saya sebaik-baiknya menurut peraturan perundang-undangan yang berlaku dengan
-penuh rasa tanggung jawab dan kesungguhan.
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Saya akan melaksanakan tugas saya sebaik-baiknya menurut peraturan perundang-undangan yang berlaku dengan penuh rasa tanggung jawab dan kesungguhan.
 
 Saya akan berempati, membela hak dan menghargai tradisi, budaya dan spiritual klien yang saya layani.
 
 Saya akan mengabdikan ilmu dan keterampilan saya dengan jujur dan adil sejalan dengan kode etik profesi saya.
 
-Saya akan menjaga martabat dan menghormati keluhuran profesi dan terus menerus mengembangkan ilmu
-kesehatan lingkungan.
+Saya akan menjaga martabat dan menghormati keluhuran profesi dan terus menerus mengembangkan ilmu kesehatan lingkungan.
 
-Saya akan membina kerjasama, keutuhan dan kesetiakawanan dengan teman sejawat dan profesi lainnya dalam
-melaksanakan tugas.
+Saya akan membina kerjasama, keutuhan dan kesetiakawanan dengan teman sejawat dan profesi lainnya dalam melaksanakan tugas.
 
-Saya tidak akan membeda-bedakan pangkat, kedudukan, keturunan, golongan, suku, bangsa, dan agama dalam
-melaksanakan tugas atas dasar kemanusiaan.
+Saya tidak akan membeda-bedakan pangkat, kedudukan, keturunan, golongan, suku, bangsa, dan agama dalam melaksanakan tugas atas dasar kemanusiaan.
 
-Saya tidak akan menginformasikan kepada siapapun segala rahasia yang berhubungan dengan tugas saya, kecuali
-jika diminta oleh pengadilan untuk keperluan kesaksian.
+Saya tidak akan menginformasikan kepada siapapun segala rahasia yang berhubungan dengan tugas saya, kecuali jika diminta oleh pengadilan untuk keperluan kesaksian.
 ]]></text>
 			</staticText>
 			<staticText>
@@ -150,6 +142,14 @@ jika diminta oleh pengadilan untuk keperluan kesaksian.
 7.
 
 ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="553" height="26" uuid="c9cf2c9a-97a2-4f11-8134-d1308facf62f"/>
+				<textFieldExpression><![CDATA["Pada hari ini Sabtu, tanggal " + new SimpleDateFormat("dd MMMMM yyyy").format(new java.util.Date()) + ", bertempat di Institut Kesehatan dan Teknologi Al Insyirah "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="25" width="555" height="15" uuid="6b75a035-cd1a-42cb-80be-181311b15bce"/>
+				<text><![CDATA[saya, yang bertanda tangan di bawah ini:]]></text>
 			</staticText>
 		</band>
 	</detail>
