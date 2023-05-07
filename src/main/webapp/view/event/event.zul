@@ -6,6 +6,10 @@
 			<n:i class="fas fa-list"></n:i>
 			<n:span>Daftar Events</n:span>
 		</caption>
+		<button label="Buat Event" autodisable="self"
+			sclass="btn btn-primary btn-sm" iconSclass="z-icon-plus-square"
+			onClick="@command('doAdd')" />
+		<n:hr />
 		<div id="divCards" />
 	</window>
 </zk>

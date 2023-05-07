@@ -1,0 +1,79 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winEventform" border="normal" width="90%"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.EventFormVm')"
+		validationMessages="@id('vmsgs')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Buat Event</n:span>
+		</caption>
+		<div id="divForm"
+			form="@id('e') @load(vm.objForm) @save(vm.objForm, before='doSave')
+			@validator(vm.validator) ">
+			<grid>
+				<columns>
+					<column width="20%" />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<label value="Nama Event" />
+						<vlayout>
+							<textbox value="@bind(e.eventname)"
+								maxlength="50" width="100%" />
+							<label style="color:gray"
+								value="@load(vmsgs['eventname'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Keterangan" />
+						<vlayout>
+							<textbox value="@bind(e.eventdesc)"
+								maxlength="200" width="100%" />
+							<label style="color:gray"
+								value="@load(vmsgs['eventdesc'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Tanggal Event" />
+						<vlayout>
+							<datebox value="@bind(e.eventdate)"
+								maxlength="10" cols="12" format="dd-MM-yyyy" />
+							<label style="color:gray"
+								value="@load(vmsgs['eventdate'])" />
+						</vlayout>
+					</row>
+					<row>
+						<label value="Biaya Pendaftaran" />
+						<vlayout>
+							<decimalbox value="@bind(e.eventprice)"
+								 format="#,##0" maxlength="20" width="100%" />
+							<label style="color:gray"
+								value="@load(vmsgs['eventprice'])" />
+						</vlayout>
+					</row>
+					<row>
+						<button sclass="btn btn-info btn-sm"
+							label="Browse Gambar ..." upload="true,maxsize=10000"
+							onUpload="@command('doUploadPhoto', upEvent=event)"
+							autodisable="self" />
+						<vlayout>
+							<image id="photo" width="90px" />
+							<label style="color:gray"
+								value="@load(vmsgs['eventimg'])" />
+						</vlayout>
+					</row>
+				</rows>
+				<foot>
+					<footer />
+					<footer>
+						<button label="Submit" autodisable="self"
+							width="100%" iconSclass="z-icon-save"
+							sclass="btn btn-primary btn-sm" onClick="@command('doSave')" />
+					</footer>
+				</foot>
+			</grid>
+		</div>
+
+	</window>
+</zk>

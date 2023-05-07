@@ -6,23 +6,16 @@
 			<n:i class="fas fa-list"></n:i>
 			<n:span>Cek Status Data Virtual Account</n:span>
 		</caption>
-		<groupbox mold="3d">
-			<caption label="Input Nomor Virtual Account" />
-			<div class="row">
-				<div class="col">
-					<textbox value="@bind(vm.vano)" maxlength="20"
-						cols="20" />
-				</div>
-				<div class="col">
-					<button label="Cek" autodisable="self"
-						iconSclass="z-icon-search" sclass="btn btn-success btn-sm"
-						onClick="@command('doSubmit')" />
-					<button label="Reset" autodisable="self"
-						iconSclass="z-icon-search" sclass="btn btn-success btn-sm"
-						onClick="@command('doReset')" />
-				</div>
+		<div class="row">
+			<div class="col">
+				<textbox value="@bind(vm.vano)" maxlength="20"
+					placeholder="Nomor Virtual Account" cols="20" />
+				<button label="Cek" autodisable="self" sclass="btn btn-success btn-sm"
+					onClick="@command('doSubmit')" />
+				<button label="Reset" autodisable="self" sclass="btn btn-success btn-sm"
+					onClick="@command('doReset')" />
 			</div>
-		</groupbox>
+		</div>
 		<n:hr />
 		<groupbox id="gbResult" mold="3d" visible="false">
 			<caption label="Data Hasil Pengecekan Virtual Account" />

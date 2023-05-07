@@ -32,6 +32,7 @@
 		<property name="show_sql">false</property>
 		<property name="use_sql_comments">false</property>
 
+		<mapping class="com.sds.hakli.domain.Msysparam" />
 		<mapping class="com.sds.hakli.domain.Mcabang" />
 		<mapping class="com.sds.hakli.domain.Mcharge" />
 		<mapping class="com.sds.hakli.domain.Mfee" />

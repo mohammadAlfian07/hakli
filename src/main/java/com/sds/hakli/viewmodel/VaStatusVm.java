@@ -1,7 +1,5 @@
 package com.sds.hakli.viewmodel;
 
-import java.util.List;
-
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -14,18 +12,18 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Messagebox;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sds.hakli.domain.Rumpun;
+import com.sds.hakli.bean.BriapiBean;
 import com.sds.hakli.extension.BriApiExt;
 import com.sds.hakli.pojo.BriApiToken;
-import com.sds.hakli.pojo.BrivaStatus;
-import com.sds.hakli.pojo.BrivaStatusResp;
+import com.sds.hakli.pojo.BrivaInquiryResp;
+import com.sds.utils.AppData;
 
 public class VaStatusVm {
 	
-	private BrivaStatusResp obj;
+	private BrivaInquiryResp obj;
 	private String vano;
+	
+	private BriapiBean bean;
 	
 	@Wire
 	private Groupbox gbResult;
@@ -33,7 +31,11 @@ public class VaStatusVm {
 	@AfterCompose
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireComponents(view, this, false);
-		
+		try {
+			bean = AppData.getBriapibean();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -42,24 +44,16 @@ public class VaStatusVm {
 	public void doSubmit() {
 		if (vano != null && vano.trim().length() > 5) {
 			try {
-				BriApiExt briapi = new BriApiExt();
+				BriApiExt briapi = new BriApiExt(bean);
 				BriApiToken briapiToken = briapi.getToken();
 				if (briapiToken != null && briapiToken.getStatus().equals("approved")) {
-					String cid = vano.substring(0, 5);
 					String custcode = vano.substring(5);
-					obj = briapi.getBriva(briapiToken.getAccess_token(), "j104408", cid, custcode);
-					System.out.println("nama : " + obj.getData().getNama());
-					if (obj.getStatus()) {
-						ObjectMapper mapper = new ObjectMapper();
-						BrivaStatus data = mapper.readValue(mapper.writeValueAsString(obj.getData()),
-								new TypeReference<BrivaStatus>() {
-								});
-						obj.setData(data);
+					obj = briapi.getBriva(briapiToken.getAccess_token(), custcode);
+					if (obj != null && obj.getStatus() != null && obj.getStatus()) {
 						gbResult.setVisible(true);
-						vano = null;
 					} else 
-						Messagebox.show(obj.getResponseDescription(), WebApps.getCurrent().getAppName(), Messagebox.OK,
-							Messagebox.ERROR);
+						Messagebox.show("Nomor virtual account tidak dikenal", WebApps.getCurrent().getAppName(), Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -88,11 +82,11 @@ public class VaStatusVm {
 		this.vano = vano;
 	}
 
-	public BrivaStatusResp getObj() {
+	public BrivaInquiryResp getObj() {
 		return obj;
 	}
 
-	public void setObj(BrivaStatusResp obj) {
+	public void setObj(BrivaInquiryResp obj) {
 		this.obj = obj;
 	}
 }

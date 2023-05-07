@@ -12,15 +12,14 @@ import com.sds.utils.db.StoreHibernateUtil;
 
 public class TcounterengineDAO {
 
-	public String getLastCounter(String counterName) throws Exception {
+	public String getLastCounter(String counterName, int counter) throws Exception {
 		Integer lastCounter = 0;
 		String strCounter = "";
 		String finalCounter = "";
-		char[] fillUploadid = new char[5];
+		char[] fillUploadid = new char[counter];
 		Session session = StoreHibernateUtil.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			counterName = counterName + new SimpleDateFormat("ddMM").format(new Date());
 			Query q = session
 					.createQuery("select lastcounter from Tcounterengine where countername = '" + counterName + "'");
 			lastCounter = (Integer) q.uniqueResult();
@@ -38,7 +37,7 @@ public class TcounterengineDAO {
 			Arrays.fill(fillUploadid, '0');
 			strCounter = new String(fillUploadid) + lastCounter;
 			finalCounter = counterName
-					+ strCounter.substring(strCounter.length()-5, strCounter.length());
+					+ strCounter.substring(strCounter.length()-counter, strCounter.length());
 		} catch (Exception e) {
 			transaction.rollback();
 			e.printStackTrace();

@@ -1,0 +1,41 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winMutasi" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.VaUpdateVm')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Update Status Virtual Account</n:span>
+		</caption>
+		<div class="row">
+			<div class="col">
+				<textbox value="@bind(vm.vano)" maxlength="20"
+					placeholder="Nomor Virtual Account" cols="20" />
+				<datebox value="@bind(vm.date)" placeholder="Tgl Transaksi" maxlength="10" format="dd-MM-yyyy"
+					cols="10" />					
+				<button label="Cek" autodisable="self" sclass="btn btn-success btn-sm"
+					onClick="@command('doSubmit')" />
+				<button label="Reset" autodisable="self" sclass="btn btn-success btn-sm"
+					onClick="@command('doReset')" />
+			</div>
+		</div>
+		<n:hr />
+		<groupbox id="gbResult" mold="3d" visible="false">
+			<caption label="Data Hasil Pengecekan Virtual Account" />
+			<grid id="grid" sizedByContent="true">
+				<columns>
+					<column label="No" />
+					<column label="Nomor VA" />
+					<column label="Nama" />
+					<column label="Tagihan" />
+					<column label="Keterangan" />
+					<column label="Waktu Bayar" />
+					<column label="Teller Id" />
+					<column label="No Rekening" />
+				</columns>
+			</grid>
+			<separator />
+			<button id="btUpdate" label="Update Status VA Menjadi Terbayar" autodisable="self" sclass="btn btn-primary btn-sm"
+					onClick="@command('doUpdate')" />
+		</groupbox>
+	</window>
+</zk>

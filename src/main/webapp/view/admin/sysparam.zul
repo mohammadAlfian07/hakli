@@ -1,0 +1,42 @@
+<?page title="${desktop.webApp.appName}"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/app_icon.ico" ?>
+<zk xmlns:w="client" xmlns:n="native">
+	<window border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.MsysparamVm')"
+		validationMessages="@id('vmsgs')">
+		<div class="card">
+			<div class="card-header">
+				<n:h6>
+					<n:i class="fas fa-lg fa-cogs"></n:i>
+					<label value="Pengaturan Parameter Sistem"
+						style="font-size: 18px" />
+				</n:h6>
+			</div>
+			<div class="card-body">
+				<div align="right">
+					<button sclass="btn btn-primary btn-sm"
+						label="Simpan" onClick="@command('doSave')"
+						width="100px" />
+				</div>
+				<separator />
+				<grid id="grid">
+					<columns>
+						<column label="Kode Parameter" />
+						<column label="Keterangan" />
+						<column label="Nilai Parameter"
+							align="center" />
+					</columns>
+					<rows />
+				</grid>
+				<separator />
+				<div align="right">
+					<button sclass="btn btn-primary btn-sm"
+						label="Simpan" onClick="@command('doSave')"
+						width="100px" />
+				</div>
+			</div>
+		</div>
+		<separator />
+	</window>
+</zk>

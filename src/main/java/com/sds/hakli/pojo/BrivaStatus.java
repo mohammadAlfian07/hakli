@@ -1,20 +1,16 @@
 package com.sds.hakli.pojo;
 
-import javax.json.bind.annotation.JsonbProperty;
-
 public class BrivaStatus {
 
 	private String institutionCode;
-	private String BrivaNo;
-	private String CustCode;
-	@JsonbProperty("Nama")
-	private String Nama;
-	private String Amount;
-	private String Keterangan;
+	private String brivaNo;
+	private String custCode;
+	private String nama;
+	private String amount;
+	private String keterangan;
 	private String statusBayar;
     private String expiredDate;
     private String lastUpdate;
-    
 	public String getInstitutionCode() {
 		return institutionCode;
 	}
@@ -22,34 +18,34 @@ public class BrivaStatus {
 		this.institutionCode = institutionCode;
 	}
 	public String getBrivaNo() {
-		return BrivaNo;
+		return brivaNo;
 	}
 	public void setBrivaNo(String brivaNo) {
-		BrivaNo = brivaNo;
+		this.brivaNo = brivaNo;
 	}
 	public String getCustCode() {
-		return CustCode;
+		return custCode;
 	}
 	public void setCustCode(String custCode) {
-		CustCode = custCode;
+		this.custCode = custCode;
 	}
 	public String getNama() {
-		return Nama;
+		return nama;
 	}
 	public void setNama(String nama) {
-		Nama = nama;
+		this.nama = nama;
 	}
 	public String getAmount() {
-		return Amount;
+		return amount;
 	}
 	public void setAmount(String amount) {
-		Amount = amount;
+		this.amount = amount;
 	}
 	public String getKeterangan() {
-		return Keterangan;
+		return keterangan;
 	}
 	public void setKeterangan(String keterangan) {
-		Keterangan = keterangan;
+		this.keterangan = keterangan;
 	}
 	public String getStatusBayar() {
 		return statusBayar;
@@ -69,6 +65,5 @@ public class BrivaStatus {
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
     
 }

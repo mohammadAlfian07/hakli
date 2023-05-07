@@ -144,6 +144,14 @@
 											</n:span>
 										</a>
 										 -->
+										 <a href="#"
+											onClick="@command('doRedirect', path='/view/admin/sysparam.zul', menu='admin', index=4)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-cog fa-fw me-3">
+											</n:i>
+											<n:span>Parameter Sistem</n:span>
+										</a>
 									</div>
 								</div>
 							</n:div>
@@ -269,15 +277,23 @@
 											onClick="@command('doRedirect', path='/view/va/vastatus.zul', menu='va', index=0)"
 											class="list-group-item list-group-item-action py-2 ripple">
 											<n:i
-												class="fas fa-calendar-alt fa-fw me-3">
+												class="fas fa-file-invoice fa-fw me-3">
 											</n:i>
 											<n:span>Cek Status VA</n:span>
 										</a>
 										<a href="#"
-											onClick="@command('doRedirect', path='/view/va/vareport.zul', menu='va', index=1)"
+											onClick="@command('doRedirect', path='/view/va/vaupdate.zul', menu='va', index=1)"
 											class="list-group-item list-group-item-action py-2 ripple">
 											<n:i
-												class="fas fa-calendar-alt fa-fw me-3">
+												class="fas fa-file-invoice fa-fw me-3">
+											</n:i>
+											<n:span>Update VA</n:span>
+										</a>
+										<a href="#"
+											onClick="@command('doRedirect', path='/view/va/vareport.zul', menu='va', index=2)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-file-invoice fa-fw me-3">
 											</n:i>
 											<n:span>Laporan VA</n:span>
 										</a>
