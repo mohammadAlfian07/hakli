@@ -79,7 +79,6 @@ import com.sds.hakli.domain.Tpendidikan;
 import com.sds.hakli.extension.ExtensionServices;
 import com.sds.utils.AppUtils;
 import com.sds.utils.StringUtils;
-import com.sds.utils.config.ConfigUtil;
 import com.sds.utils.db.StoreHibernateUtil;
 
 public class AnggotaFormVm {

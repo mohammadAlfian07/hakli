@@ -1,0 +1,47 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native">
+	<window id="winMutasi" border="normal"
+		viewModel="@id('vm') @init('com.sds.hakli.viewmodel.VaReportVm')">
+		<caption>
+			<n:i class="fas fa-list"></n:i>
+			<n:span>Laporan Virtual Account</n:span>
+		</caption>
+		<div class="row">
+			<div class="col">
+				<datebox value="@bind(vm.startperiod)" maxlength="10" placeholder="Tanggal Awal"
+					format="dd-MM-yyyy" cols="10" />
+				<datebox value="@bind(vm.endperiod)" maxlength="10" placeholder="Tanggal Akhir"
+					format="dd-MM-yyyy" cols="10" />
+				<button label="Cek" autodisable="self"
+					sclass="btn btn-success btn-sm" onClick="@command('doSubmit')" />
+				<button label="Reset" autodisable="self"
+					sclass="btn btn-success btn-sm" onClick="@command('doReset')" />
+			</div>
+		</div>
+		<n:hr />
+		<groupbox id="gbResult" mold="3d" visible="false">
+			<caption label="Daftar Laporan Virtual Account" />
+			<div class="row">
+				<div class="col" align="right">
+					<label value="${labels.common.totalrecord} :"
+						style="font-weight: bold" />
+					<label value="@load(vm.pageTotalSize)"
+						style="font-weight: bold" />
+				</div>
+			</div>
+			<grid id="grid" sizedByContent="true" mold="paging"
+				pageSize="20" pagingPosition="both">
+				<columns>
+					<column label="No" />
+					<column label="Nomor VA" />
+					<column label="Nama" />
+					<column label="Tagihan" />
+					<column label="Keterangan" />
+					<column label="Waktu Bayar" />
+					<column label="Teller Id" />
+					<column label="No Rekening" />
+				</columns>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

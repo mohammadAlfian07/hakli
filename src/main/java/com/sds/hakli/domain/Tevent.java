@@ -16,6 +16,8 @@ public class Tevent {
 	
 	private Integer teventpk;
 	
+	private String eventid;
+	
 	private Date eventdate;
 	
 	private String eventdesc;
@@ -35,6 +37,16 @@ public class Tevent {
 
 	public void setTeventpk(Integer teventpk) {
 		this.teventpk = teventpk;
+	}
+	
+	
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
+	public String getEventid() {
+		return eventid;
+	}
+
+	public void setEventid(String eventid) {
+		this.eventid = eventid;
 	}
 
 	public Date getEventdate() {

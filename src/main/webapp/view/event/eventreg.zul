@@ -18,7 +18,7 @@
 			<n:span>Pendaftaran Sumpah Profesi Nasional Ke-VII</n:span>
 		</caption>
 
-		<image src="/img/sumpahprofesi.png" width="100%" />
+		<image src="@load(vm.eventimg)" width="100%" />
 
 		<div id="divForm"
 			form="@id('e') @load(vm.objForm) @save(vm.objForm, before='doSave')

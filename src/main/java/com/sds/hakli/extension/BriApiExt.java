@@ -2,9 +2,10 @@ package com.sds.hakli.extension;
 
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 import java.util.TimeZone;
 
 import javax.crypto.Mac;
@@ -15,40 +16,43 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sds.hakli.bean.BriapiBean;
 import com.sds.hakli.pojo.BriApiToken;
 import com.sds.hakli.pojo.BrivaCreateResp;
 import com.sds.hakli.pojo.BrivaData;
+import com.sds.hakli.pojo.BrivaDataUpdate;
+import com.sds.hakli.pojo.BrivaInquiryResp;
+import com.sds.hakli.pojo.BrivaReport;
+import com.sds.hakli.pojo.BrivaReportResp;
+import com.sds.hakli.pojo.BrivaStatus;
+import com.sds.hakli.pojo.BrivaUpdateResp;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 public class BriApiExt {
 	
-	String url_briapi = "https://sandbox.partner.api.bri.co.id/oauth/client_credential/accesstoken";
-	String url_briva = "https://sandbox.partner.api.bri.co.id/v1/briva";
-	String client_id = "P0HhD42Hk5zNQ8Me58gxRA9XIznRBQkN";
-	String client_secret = "nUmPkHfO5qnxgZ9a";
+//	String url_briapi = "https://sandbox.partner.api.bri.co.id/oauth/client_credential/accesstoken";
+//	String url_briva = "https://sandbox.partner.api.bri.co.id/v1/briva";
+//	String client_id = "P0HhD42Hk5zNQ8Me58gxRA9XIznRBQkN";
+//	String client_secret = "nUmPkHfO5qnxgZ9a";
 	
-	public static void main(String[] args) {
-		try {
-			BriApiExt api = new BriApiExt();
-			//api.getToken();
-			//api.createBriva();
-			api.getBriva();
-			//api.getStatusBriva();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private BriapiBean bean;
+	
+	public BriApiExt(BriapiBean bean) {
+		this.bean = bean;
 	}
-
+	
 	public BriApiToken getToken() throws Exception {
 		BriApiToken obj = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -86,14 +90,14 @@ public class BriApiExt {
 		    System.out.println("***Begin Access Token***");
 			
 		    MultivaluedMap<String, String> input = new MultivaluedHashMap<String, String>();
-			input.add("client_id", client_id);
-			input.add("client_secret", client_secret);
+			input.add("client_id", bean.getConsumerkey());
+			input.add("client_secret", bean.getConsumersecret());
 			
 			Client client = Client.create();
 			client.setConnectTimeout(60 * 1000);
 			client.setReadTimeout(60 * 1000);
 
-			WebResource webResource = client.resource(url_briapi);
+			WebResource webResource = client.resource(bean.getUrl() + bean.getBriapi_pathtoken());
 			ClientResponse response = webResource.queryParam("grant_type", "client_credentials").type(MediaType.APPLICATION_FORM_URLENCODED)
 					.post(ClientResponse.class, input);
 
@@ -145,16 +149,7 @@ public class BriApiExt {
 		    HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 		    
 		    System.out.println("***Begin Create BRIVA***");
-			
-//		    BrivaData data = new BrivaData();
-//		    data.setAmount("100000");
-//		    data.setBrivaNo("77777");
-//		    data.setCustCode("6456454547");
-//		    data.setExpiredDate("2023-05-10 09:57:26");
-//		    data.setInstitutionCode("J104408");
-//		    data.setKeterangan("Retribusi oktober");
-//		    data.setNama("Ibrahim");
-		    
+	
 		    Client client = Client.create();
 			client.setConnectTimeout(60 * 1000);
 			client.setReadTimeout(60 * 1000);
@@ -166,7 +161,7 @@ public class BriApiExt {
 			String jsonReq = mapper.writeValueAsString(data);
 			
 			StringBuffer payload = new StringBuffer();
-			payload.append("path=/v1/briva");
+			payload.append("path=" + bean.getBriva_pathcreate());
 			payload.append("&");
 			payload.append("verb=POST");
 			payload.append("&");
@@ -176,11 +171,16 @@ public class BriApiExt {
 			payload.append("&");
 			payload.append("body=" + jsonReq);
 			
-			System.out.println(payload.toString());
-			String signature = encode(client_secret, payload.toString());
-			System.out.println(signature);
+			String signature = encode(bean.getConsumersecret(), payload.toString());
 			
-			WebResource webResource = client.resource(url_briva);
+			System.out.println("Request Time : " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			System.out.println("Header - Authorization : " + auth);
+			System.out.println("Header - BRI-Signature : " + signature);
+			System.out.println("Header - BRI-Timestamp : " + xtimestamp);
+			System.out.println("Request body : " + jsonReq);
+			System.out.println("Payload : " + payload.toString());
+			
+			WebResource webResource = client.resource(bean.getUrl() + bean.getBriva_pathcreate());
 			ClientResponse response = webResource.header("Authorization", auth)
 					.header("BRI-Timestamp", xtimestamp)
 					.header("BRI-Signature", signature)
@@ -189,7 +189,7 @@ public class BriApiExt {
 					.post(ClientResponse.class, jsonReq);
 
 			output = response.getEntity(String.class);
-			System.out.println(output);
+			System.out.println("Response : " + output);
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			obj = mapper.readValue(output, BrivaCreateResp.class);
 			client.destroy();
@@ -200,7 +200,8 @@ public class BriApiExt {
 		return obj;
 	}
 	
-	public void getBriva() throws Exception {
+	public BrivaInquiryResp getBriva(String token, String custcode) throws Exception {
+		BrivaInquiryResp obj = new BrivaInquiryResp();
 		ObjectMapper mapper = new ObjectMapper();
 		String output = null;
 		try {
@@ -239,13 +240,13 @@ public class BriApiExt {
 			client.setConnectTimeout(60 * 1000);
 			client.setReadTimeout(60 * 1000);
 			
-			String auth = "Bearer 6j0k44tKwLKD1fkkcgdAikHLR1gM";
+			String auth = "Bearer " + token;
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 			dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 			String xtimestamp = dateFormatter.format(new Date());
 			
 			StringBuffer payload = new StringBuffer();
-			payload.append("path=/v1/briva/j104408/77777/6456454547");
+			payload.append("path=" + bean.getBriva_pathget() + "/" + bean.getBriva_institutioncode() +"/" + bean.getBriva_cid() + "/" + custcode);
 			payload.append("&");
 			payload.append("verb=GET");
 			payload.append("&");
@@ -255,30 +256,48 @@ public class BriApiExt {
 			payload.append("&");
 			payload.append("body=");
 			
-			System.out.println(payload.toString());
-			String signature = encode(client_secret, payload.toString());
-			System.out.println(signature);
+			String signature = encode(bean.getConsumersecret(), payload.toString());
 			
-			WebResource webResource = client.resource(url_briva + "/j104408/77777/6456454547");
+			System.out.println("Request Time : " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			System.out.println("Header - Authorization : " + auth);
+			System.out.println("Header - BRI-Signature : " + signature);
+			System.out.println("Header - BRI-Timestamp : " + xtimestamp);
+			System.out.println("Payload : " + payload.toString());
+			
+			WebResource webResource = client.resource(bean.getUrl() + bean.getBriva_pathget() + "/" + bean.getBriva_institutioncode() +"/" + bean.getBriva_cid() + "/" + custcode);
 			ClientResponse response = webResource.header("Authorization", auth)
 					.header("BRI-Timestamp", xtimestamp)
 					.header("BRI-Signature", signature)
-					//.type(MediaType.APPLICATION_JSON_TYPE)
 					.accept(MediaType.APPLICATION_JSON)
 					.get(ClientResponse.class);
 
 			output = response.getEntity(String.class);
-			System.out.println(output);
+			System.out.println("Response : " + output);
+			
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			//BrivaCreateResp obj = mapper.readValue(output, BrivaCreateResp.class);
+			obj = mapper.readValue(output, BrivaInquiryResp.class);
+			if (obj.getStatus()) {
+				JSONObject json = new JSONObject(output);
+				BrivaStatus data = new BrivaStatus();
+				data.setInstitutionCode(json.getJSONObject("data").getString("institutionCode"));
+				data.setAmount(json.getJSONObject("data").getString("Amount"));
+				data.setNama(json.getJSONObject("data").getString("Nama"));
+				data.setBrivaNo(json.getJSONObject("data").getString("BrivaNo") + json.getJSONObject("data").getString("CustCode"));
+				data.setKeterangan(json.getJSONObject("data").getString("Keterangan"));
+				data.setStatusBayar(json.getJSONObject("data").getString("statusBayar"));
+				data.setExpiredDate(json.getJSONObject("data").getString("expiredDate"));
+				obj.setData(data);
+			}
 			client.destroy();
 			System.out.println("***End Get BRIVA***");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return obj;
 	}
 	
-	public void getStatusBriva() throws Exception {
+	public BrivaUpdateResp updateBriva(String token, BrivaDataUpdate data) throws Exception {
+		BrivaUpdateResp obj = null;
 		ObjectMapper mapper = new ObjectMapper();
 		String output = null;
 		try {
@@ -311,20 +330,105 @@ public class BriApiExt {
 		    // Install the all-trusting host verifier
 		    HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 		    
-		    System.out.println("***Begin Get Status BRIVA***");
+		    System.out.println("***Begin Update BRIVA***");
 			
 		    Client client = Client.create();
 			client.setConnectTimeout(60 * 1000);
 			client.setReadTimeout(60 * 1000);
 			
-			String auth = "Bearer 6j0k44tKwLKD1fkkcgdAikHLR1gM";
-			
+			String auth = "Bearer " + token;
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 			dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 			String xtimestamp = dateFormatter.format(new Date());
-			System.out.println(xtimestamp);
+			String jsonReq = mapper.writeValueAsString(data);
+			
 			StringBuffer payload = new StringBuffer();
-			payload.append("path=/v1/briva/status/j104408/77777/1");
+			payload.append("path=" + bean.getBriva_pathupdate());
+			payload.append("&");
+			payload.append("verb=PUT");
+			payload.append("&");
+			payload.append("token=" + auth);
+			payload.append("&");
+			payload.append("timestamp=" + xtimestamp);
+			payload.append("&");
+			payload.append("body=" + jsonReq);
+			
+			String signature = encode(bean.getConsumersecret(), payload.toString());
+			
+			System.out.println("Request Time : " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			System.out.println("Header - Authorization : " + auth);
+			System.out.println("Header - BRI-Signature : " + signature);
+			System.out.println("Header - BRI-Timestamp : " + xtimestamp);
+			System.out.println("Payload : " + payload.toString());
+			System.out.println("Request Body : " + jsonReq);
+			
+			WebResource webResource = client.resource(bean.getUrl() + bean.getBriva_pathupdate());
+			ClientResponse response = webResource.header("Authorization", auth)
+					.header("BRI-Timestamp", xtimestamp)
+					.header("BRI-Signature", signature)
+					.type(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON)
+					.put(ClientResponse.class, jsonReq);
+
+			output = response.getEntity(String.class);
+			System.out.println("Response : " + output);
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			obj = mapper.readValue(output, BrivaUpdateResp.class);
+			client.destroy();
+			System.out.println("***End Update BRIVA***");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+	
+	public BrivaReportResp getBrivaReport(String token, String startdate, String enddate) throws Exception {
+		BrivaReportResp obj = new BrivaReportResp();
+		ObjectMapper mapper = new ObjectMapper();
+		String output = null;
+		try {
+			 // Create a trust manager that does not validate certificate chains
+		    TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager() {
+		        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+		            return null;
+		        }
+		        public void checkClientTrusted(X509Certificate[] certs, String authType) {
+		        }
+		        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+		        }
+		    }
+		    };
+
+		    // Install the all-trusting trust manager
+		    SSLContext sc = SSLContext.getInstance("SSL");
+		    sc.init(null, trustAllCerts, new java.security.SecureRandom());
+		    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+		    // Create all-trusting host name verifier
+		    HostnameVerifier allHostsValid = new HostnameVerifier() {
+				
+				@Override
+				public boolean verify(String hostname, SSLSession session) {
+					return false;
+				}
+			};
+
+		    // Install the all-trusting host verifier
+		    HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+		    
+		    System.out.println("***Begin Get BRIVA Report***");
+			
+		    Client client = Client.create();
+			client.setConnectTimeout(60 * 1000);
+			client.setReadTimeout(60 * 1000);
+			
+			String auth = "Bearer " + token;
+			SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
+			String xtimestamp = dateFormatter.format(new Date());
+			
+			StringBuffer payload = new StringBuffer();
+			payload.append("path=" + bean.getBriva_pathreport() + "/" + bean.getBriva_institutioncode() +"/" + bean.getBriva_cid() + "/" + startdate + "/" + enddate);
 			payload.append("&");
 			payload.append("verb=GET");
 			payload.append("&");
@@ -334,27 +438,53 @@ public class BriApiExt {
 			payload.append("&");
 			payload.append("body=");
 			
-			System.out.println("payload : " + payload.toString());
-			String signature = encode(client_secret, payload.toString());
-			System.out.println("signature : " + signature);
-			System.out.println("response : ");
-			WebResource webResource = client.resource(url_briva + "/status/j104408/77777/1");
+			String signature = encode(bean.getConsumersecret(), payload.toString());
+			
+			System.out.println("Request Time : " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			System.out.println("Header - Authorization : " + auth);
+			System.out.println("Header - BRI-Signature : " + signature);
+			System.out.println("Header - BRI-Timestamp : " + xtimestamp);
+			System.out.println("Payload : " + payload.toString());
+			
+			WebResource webResource = client.resource(bean.getUrl() + bean.getBriva_pathreport() + "/" + bean.getBriva_institutioncode() +"/" + bean.getBriva_cid() + "/" + startdate + "/" + enddate);
 			ClientResponse response = webResource.header("Authorization", auth)
 					.header("BRI-Timestamp", xtimestamp)
 					.header("BRI-Signature", signature)
-					//.type(MediaType.APPLICATION_JSON_TYPE)
 					.accept(MediaType.APPLICATION_JSON)
 					.get(ClientResponse.class);
 
 			output = response.getEntity(String.class);
 			System.out.println(output);
+			
 			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			//BrivaCreateResp obj = mapper.readValue(output, BrivaCreateResp.class);
+			obj = mapper.readValue(output, BrivaReportResp.class);
+			if (obj.getStatus()) {
+				JSONObject json = new JSONObject(output);
+				
+				List<BrivaReport> datas = new ArrayList<>();
+				JSONArray jsonArray = json.getJSONArray("data");
+				for (int i=0; i<jsonArray.length(); i++) {
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					BrivaReport data = new BrivaReport();
+					data.setAmount(jsonObj.getString("amount"));
+					data.setNama(jsonObj.getString("nama"));
+					data.setBrivaNo(jsonObj.getString("brivaNo"));
+					data.setKeterangan(jsonObj.getString("keterangan"));
+					data.setPaymentDate(jsonObj.getString("paymentDate"));
+					data.setTellerid(jsonObj.getString("tellerid"));
+					data.setNo_rek(jsonObj.getString("no_rek"));
+					data.setCustCode(jsonObj.getString("custCode"));
+					datas.add(data);
+				}
+				
+				obj.setData(datas);
+			}
 			client.destroy();
-			System.out.println("***End Get BRIVA***");
+			System.out.println("***End Get BRIVA Report***");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return obj;
 	}
 	
 	public static String encode(String key, String data) throws Exception {

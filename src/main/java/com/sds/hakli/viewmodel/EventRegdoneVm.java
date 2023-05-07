@@ -16,11 +16,14 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Html;
 import org.zkoss.zul.Separator;
 
+import com.sds.hakli.domain.Tevent;
 import com.sds.hakli.domain.Teventreg;
+import com.sds.utils.AppUtils;
 
 public class EventRegdoneVm {
 	
 	private String processinfo;
+	private String eventimg;
 	
 	@Wire
 	private Div divInfo;
@@ -32,6 +35,7 @@ public class EventRegdoneVm {
 			if (obj == null) {
 				Executions.sendRedirect("/view/event/eventinit.zul");
 			} else {
+				eventimg = AppUtils.PATH_EVENT + "/" + obj.getTevent().getEventimg();
 				if (obj.getIspaid().equals("Y")) {
 					HtmlNativeComponent strong = new HtmlNativeComponent("strong");
 					strong.appendChild(new Html("Proses pendaftaran dan pembayaran berhasil."));
@@ -128,6 +132,14 @@ public class EventRegdoneVm {
 
 	public void setProcessinfo(String processinfo) {
 		this.processinfo = processinfo;
+	}
+
+	public String getEventimg() {
+		return eventimg;
+	}
+
+	public void setEventimg(String eventimg) {
+		this.eventimg = eventimg;
 	}
 	
 	
