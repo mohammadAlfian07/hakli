@@ -6,6 +6,6 @@
 			<n:i class="fas fa-list"></n:i>
 			<n:span>Cetak KTA</n:span>
 		</caption>
-		<div id="div" width="100%" height="100%" align="center" />
+		<div id="div" width="100%" height="1000px" align="center" />
 	</window>
 </zk>
