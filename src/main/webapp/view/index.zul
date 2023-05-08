@@ -71,6 +71,16 @@
 												Mutasi
 											</n:span>
 										</a>
+										<a href="#"
+											onClick="@command('doRedirect', path='/view/anggota/cetakkta.zul', menu='anggota', index=3)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-share fa-fw me-3">
+											</n:i>
+											<n:span>
+												Cetak KTA
+											</n:span>
+										</a>
 									</div>
 								</div>
 							</n:div>

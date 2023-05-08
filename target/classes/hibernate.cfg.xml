@@ -5,8 +5,13 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+<<<<<<< HEAD
 		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hakliorgdb</property> -->
 		<property name="hibernate.connection.url">jdbc:postgresql://10.12.4.164:5432/haklidb2</property>		
+=======
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/haklidb2</property>
+		<!-- <property name="hibernate.connection.url">jdbc:postgresql://10.12.4.164:5432/haklidb2</property> -->		
+>>>>>>> alfianptr
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
 		<!-- <property name="hibernate.connection.password">SDS@dmindepok</property> -->
@@ -32,6 +37,7 @@
 		<property name="show_sql">false</property>
 		<property name="use_sql_comments">false</property>
 
+		<mapping class="com.sds.hakli.domain.Msysparam" />
 		<mapping class="com.sds.hakli.domain.Mcabang" />
 		<mapping class="com.sds.hakli.domain.Mcharge" />
 		<mapping class="com.sds.hakli.domain.Mfee" />

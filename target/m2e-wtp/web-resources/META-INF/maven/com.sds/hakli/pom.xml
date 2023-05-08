@@ -169,6 +169,7 @@
 			<artifactId>groovy-all</artifactId>
 			<version>2.4.10</version>
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
 			<groupId>net.sf.barcode4j</groupId>
 			<artifactId>barcode4j</artifactId>
@@ -179,6 +180,16 @@
 			<artifactId>barbecue</artifactId>
 			<version>1.5-beta1</version>
 		</dependency>
+=======
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230227</version>
+		</dependency>
+
+>>>>>>> alfianptr
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>

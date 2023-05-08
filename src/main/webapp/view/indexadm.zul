@@ -144,6 +144,14 @@
 											</n:span>
 										</a>
 										 -->
+										 <a href="#"
+											onClick="@command('doRedirect', path='/view/admin/sysparam.zul', menu='admin', index=4)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-cog fa-fw me-3">
+											</n:i>
+											<n:span>Parameter Sistem</n:span>
+										</a>
 									</div>
 								</div>
 							</n:div>
@@ -242,6 +250,52 @@
 												class="fas fa-calendar-alt fa-fw me-3">
 											</n:i>
 											<n:span>Event</n:span>
+										</a>
+									</div>
+								</div>
+							</n:div>
+						</div>
+						
+						<div class="accordion-item">
+							<n:h2 class="accordion-header"
+								id="flush-headingFour">
+								<n:button
+									class="accordion-button collapsed" type="button"
+									data-mdb-toggle="collapse" data-mdb-target="#flush-collapseFour"
+									aria-expanded="false" aria-controls="flush-collapseFour">
+									Virtual Account
+								</n:button>
+							</n:h2>
+							<n:div id="flush-collapseFour"
+								class="accordion-collapse collapse"
+								aria-labelledby="flush-headingFour"
+								data-mdb-parent="#divAccord">
+								<div class="accordion-body">
+									<div id="divMenuVa"
+										class="list-group list-group-flush mx-3 mt-4">
+										<a href="#"
+											onClick="@command('doRedirect', path='/view/va/vastatus.zul', menu='va', index=0)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-file-invoice fa-fw me-3">
+											</n:i>
+											<n:span>Cek Status VA</n:span>
+										</a>
+										<a href="#"
+											onClick="@command('doRedirect', path='/view/va/vaupdate.zul', menu='va', index=1)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-file-invoice fa-fw me-3">
+											</n:i>
+											<n:span>Update VA</n:span>
+										</a>
+										<a href="#"
+											onClick="@command('doRedirect', path='/view/va/vareport.zul', menu='va', index=2)"
+											class="list-group-item list-group-item-action py-2 ripple">
+											<n:i
+												class="fas fa-file-invoice fa-fw me-3">
+											</n:i>
+											<n:span>Laporan VA</n:span>
 										</a>
 									</div>
 								</div>

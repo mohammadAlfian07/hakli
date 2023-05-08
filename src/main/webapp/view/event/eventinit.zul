@@ -29,7 +29,7 @@
         backdrop-filter: blur(30px);
         ">
         
-        	<image src="/img/sumpahprofesi.png" width="100%" />
+        	<image src="@load(vm.eventimg)" width="100%" />
 
 				<div class="card-body py-5 px-md-5">
 

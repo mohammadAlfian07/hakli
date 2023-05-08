@@ -52,6 +52,8 @@ public class Tanggota {
 	
 	private String alamat;
 	
+	private String kota;
+	
 	private String kodepos;
 	
 	private String telp;
@@ -391,6 +393,14 @@ public class Tanggota {
 	}
 	public void setRegdecisiontime(Date regdecisiontime) {
 		this.regdecisiontime = regdecisiontime;
+	}
+	
+	@Type(type = "com.sds.utils.usertype.TrimUserType")
+	public String getKota() {
+		return kota;
+	}
+	public void setKota(String kota) {
+		this.kota = kota;
 	}
 	
 }

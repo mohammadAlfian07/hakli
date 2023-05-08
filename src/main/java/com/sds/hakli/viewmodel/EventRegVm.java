@@ -46,6 +46,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
+import com.sds.hakli.bean.BriapiBean;
 import com.sds.hakli.dao.McabangDAO;
 import com.sds.hakli.dao.MjenjangDAO;
 import com.sds.hakli.dao.MkabupatenDAO;
@@ -71,7 +72,6 @@ import com.sds.hakli.domain.Mnegara;
 import com.sds.hakli.domain.Mprovinsi;
 import com.sds.hakli.domain.Mrumpun;
 import com.sds.hakli.domain.Muniversitas;
-import com.sds.hakli.domain.Provinsi;
 import com.sds.hakli.domain.Tanggota;
 import com.sds.hakli.domain.Tevent;
 import com.sds.hakli.domain.Teventreg;
@@ -81,6 +81,7 @@ import com.sds.hakli.extension.BriApiExt;
 import com.sds.hakli.pojo.BriApiToken;
 import com.sds.hakli.pojo.BrivaCreateResp;
 import com.sds.hakli.pojo.BrivaData;
+import com.sds.utils.AppData;
 import com.sds.utils.AppUtils;
 import com.sds.utils.StringUtils;
 import com.sds.utils.db.StoreHibernateUtil;
@@ -115,6 +116,9 @@ public class EventRegVm {
 	private Date dob;
 	private Boolean isView;
 	private String ijazahfilename;
+	
+	private Tevent tevent;
+	private String eventimg;
 
 	private DateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -168,12 +172,15 @@ public class EventRegVm {
 	private Row rowNegara;
 
 	@AfterCompose
-	public void afterCompose(@ContextParam(ContextType.VIEW) Component view, @ExecutionArgParam("obj") Tanggota obj) {
+	public void afterCompose(@ContextParam(ContextType.VIEW) Component view, 
+			@ExecutionArgParam("event") Tevent tevent, @ExecutionArgParam("obj") Tanggota obj) {
 		Selectors.wireComponents(view, this, false);
 		try {
 			if (obj == null) {
 				Executions.sendRedirect("/timeout.zul");
 			} else {
+				this.tevent = tevent;
+				eventimg = AppUtils.PATH_EVENT + "/" + tevent.getEventimg();
 				init();
 				doReset();
 				objForm = new AnggotaReg();
@@ -460,7 +467,7 @@ public class EventRegVm {
 								
 								if (mediaIjazah != null) {
 									try {
-										String ijazahlink = new TcounterengineDAO().getLastCounter("DOC" + new SimpleDateFormat("yyMM").format(new Date())) + "." + mediaIjazah.getFormat();
+										String ijazahlink = new TcounterengineDAO().getLastCounter("DOC" + new SimpleDateFormat("yyMM").format(new Date()), 5) + "." + mediaIjazah.getFormat();
 										String folder = Executions.getCurrent().getDesktop().getWebApp()
 												.getRealPath(AppUtils.PATH_IJAZAH);
 										System.out.println("Ijazah Path : " + folder);
@@ -502,18 +509,18 @@ public class EventRegVm {
 								objForm.getPekerjaan().setKabname(kabkantor.getKabname());
 								pekerjaanDao.save(session, objForm.getPekerjaan());
 								
-								Tevent tevent = eventDao.listByFilter("0=0", "teventpk").get(0);
-								
 								eventreg.setTevent(tevent);
 								eventreg.setTanggota(objForm.getPribadi());
 								eventreg.setIspaid("N");
-								BriApiExt briapi = new BriApiExt();
+								
+								BriapiBean bean = AppData.getBriapibean();
+								BriApiExt briapi = new BriApiExt(bean);
 								BriApiToken briapiToken = briapi.getToken();
 								if (briapiToken != null && briapiToken.getStatus().equals("approved")) {
 									BrivaData briva = new BrivaData();
 									briva.setAmount(tevent.getEventprice().toString());
-									briva.setInstitutionCode("J104408");
-									briva.setBrivaNo("77777");
+									briva.setInstitutionCode(bean.getBriva_institutioncode());
+									briva.setBrivaNo(bean.getBriva_cid());
 									
 									String custcode_prov = "00" + objForm.getPribadi().getMcabang().getMprovinsi().getProvcode();
 									String custcode = custcode_prov.substring(custcode_prov.length()-2, custcode_prov.length());
@@ -834,6 +841,14 @@ public class EventRegVm {
 
 	public void setIjazahfilename(String ijazahfilename) {
 		this.ijazahfilename = ijazahfilename;
+	}
+
+	public String getEventimg() {
+		return eventimg;
+	}
+
+	public void setEventimg(String eventimg) {
+		this.eventimg = eventimg;
 	}
 
 }

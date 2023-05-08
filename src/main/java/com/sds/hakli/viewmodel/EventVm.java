@@ -34,6 +34,7 @@ import com.sds.hakli.domain.Tanggota;
 import com.sds.hakli.domain.Tevent;
 import com.sds.hakli.domain.Teventreg;
 import com.sds.hakli.domain.Veventamount;
+import com.sds.utils.AppUtils;
 
 public class EventVm {
 
@@ -54,13 +55,30 @@ public class EventVm {
 			e.printStackTrace();
 		}
 	}
+	
+	@Command
+	public void doAdd() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Window win = (Window) Executions
+				.createComponents("/view/event/eventform.zul", null, map);
+		win.setClosable(true);
+		win.addEventListener(Events.ON_CLOSE, new EventListener<Event>() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				doRender();
+			}
+		});
+		win.doModal();
+	}
 
 	public void doRender() {
 		try {
+			divCards.getChildren().clear();
 			for (Tevent obj : oDao.listByFilter("0=0", "eventdate desc")) {
 				Div card = new Div();
 				card.setSclass("card mx-4 mx-md-5 shadow-5-strong text-center");
-				Image img = new Image("/img/sumpahprofesi.png");
+				Image img = new Image(AppUtils.PATH_EVENT + "/" + obj.getEventimg());
 				img.setSclass("card-img-top");
 				img.setParent(card);
 				Div cardbody = new Div();
@@ -78,6 +96,10 @@ public class EventVm {
 				HtmlNativeComponent ul = new HtmlNativeComponent("ul");
 				ul.setClientAttribute("class", "list-group list-group-light list-group-small");
 				ul.setParent(card);
+				HtmlNativeComponent li0 = new HtmlNativeComponent("li");
+				li0.setClientAttribute("class", "list-group-item px-4");
+				li0.appendChild(new Html("Event ID " + obj.getEventid()));
+				li0.setParent(ul);
 				HtmlNativeComponent li1 = new HtmlNativeComponent("li");
 				li1.setClientAttribute("class", "list-group-item px-4");
 				li1.appendChild(new Html("Jumlah Pendaftar " + vsum.getTotalreg()));
