@@ -36,4 +36,13 @@ public class AppData {
 		}
 		return bean;
 	}
+	
+	public static String getStatusLabel(String code) {
+		if (code.trim().equals(AppUtils.STATUS_APPROVED))
+			return "APPROVED";
+		else if (code.trim().equals(AppUtils.STATUS_REJECTED))
+			return "REJECTED";
+		else
+			return code;
+	}
 }

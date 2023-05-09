@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -28,6 +29,8 @@ import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Column;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Iframe;
@@ -58,14 +61,30 @@ public class P2kbA03DetailVm {
 	private Tp2kb p2kb;
 	private BigDecimal totalskp;
 	
+	private Map<Integer, Tp2kba03> mapData = new HashMap<>();
+	private Integer totalselected = 0;
+
+	private String action;
+
+	@Wire
+	private Column colCheck, colAksi;
+	@Wire
+	private Div divApprove;
 	@Wire
 	private Window winP2kba03Detail;
 	@Wire
 	private Grid grid;
 	
 	@AfterCompose
-	public void afterCompose(@ContextParam(ContextType.VIEW) Component view, @ExecutionArgParam("obj") Tp2kb p2kb) {
+	public void afterCompose(@ContextParam(ContextType.VIEW) Component view, @ExecutionArgParam("obj") Tp2kb p2kb,
+			@ExecutionArgParam("isApprove") String isApprove) {
 		Selectors.wireComponents(view, this, false);
+		if (isApprove != null && isApprove.equals("Y")) {
+			colCheck.setVisible(true);
+			colAksi.setVisible(false);
+			divApprove.setVisible(true);
+		}
+		
 		anggota = (Tanggota) zkSession.getAttribute("anggota");
 		this.p2kb = p2kb;
 		
@@ -74,6 +93,25 @@ public class P2kbA03DetailVm {
 			@Override
 			public void render(Row row, Tp2kba03 data, int index) throws Exception {
 				row.getChildren().add(new Label(String.valueOf(index+1)));
+				
+				Checkbox check = new Checkbox();
+				check.setAttribute("obj", data);
+				check.addEventListener(Events.ON_CHECK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event event) throws Exception {
+						Checkbox checked = (Checkbox) event.getTarget();
+						if (checked.isChecked()) {
+							mapData.put(data.getTp2kba03pk(), data);
+						} else {
+							mapData.remove(data.getTp2kba03pk());
+						}
+						totalselected = mapData.size();
+					}
+				});
+				if (mapData.get(data.getTp2kba03pk()) != null)
+					check.setChecked(true);
+
+				row.getChildren().add(check);
 				
 				Vlayout vlayoutKet = new Vlayout();
 				
@@ -247,6 +285,52 @@ public class P2kbA03DetailVm {
 		});
 		
 		doRefresh();
+	}
+	
+	@Command()
+	@NotifyChange("*")
+	public void doSubmit() {
+		if (mapData.size() > 0) {
+			if (action != null && action.trim().length() >0) {
+			Messagebox.show("Apakah anda yakin submit data ini?", "Confirm Dialog", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION, new EventListener<Event>() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+							if (event.getName().equals("onOK")) {
+								try {
+									Session session = StoreHibernateUtil.openSession();
+									Transaction trx = session.beginTransaction();
+
+									p2kb.setTotalwaiting(p2kb.getTotalwaiting() - totalselected);
+									new Tp2kbDAO().save(session, p2kb);
+
+									for (Entry<Integer, Tp2kba03> entry : mapData.entrySet()) {
+										Tp2kba03 obj = entry.getValue();
+										obj.setStatus(action);
+										new Tp2kbA03DAO().save(session, obj);
+									}
+
+									trx.commit();
+									session.close();
+
+									Clients.showNotification("Submit data berhasil.", "info", null,
+											"middle_center", 3000);
+									Event closeEvent = new Event("onClose", winP2kba03Detail, null);
+									Events.postEvent(closeEvent);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					});
+			} else {
+				Messagebox.show("Silahkan status terlebih dahulu.");
+			}
+		} else {
+			Messagebox.show("Silahkan pilih data terlebih dahulu.");
+		}
+
 	}
 	
 	@NotifyChange("totalskp")

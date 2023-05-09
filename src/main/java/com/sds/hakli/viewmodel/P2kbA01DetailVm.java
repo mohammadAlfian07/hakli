@@ -67,26 +67,26 @@ public class P2kbA01DetailVm {
 	private String action;
 
 	@Wire
-	private Window winP2kba01Detail;
-	@Wire
-	private Grid grid;
-	@Wire
 	private Column colCheck, colAksi;
 	@Wire
 	private Div divApprove;
+	@Wire
+	private Window winP2kba01Detail;
+	@Wire
+	private Grid grid;
 
 	@AfterCompose
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view, @ExecutionArgParam("obj") Tp2kb p2kb,
-			@ExecutionArgParam("isApprove") String isApprove, @ExecutionArgParam("window") Window winVerifikasidata) {
+			@ExecutionArgParam("isApprove") String isApprove) {
 		Selectors.wireComponents(view, this, false);
-		anggota = (Tanggota) zkSession.getAttribute("anggota");
-		this.p2kb = p2kb;
-
 		if (isApprove != null && isApprove.equals("Y")) {
 			colCheck.setVisible(true);
 			colAksi.setVisible(false);
 			divApprove.setVisible(true);
 		}
+		
+		anggota = (Tanggota) zkSession.getAttribute("anggota");
+		this.p2kb = p2kb;
 
 		grid.setRowRenderer(new RowRenderer<Tp2kba01>() {
 
