@@ -66,10 +66,17 @@ public class VerifikasiP2kbVm {
 						Map<String, Object> map = new HashMap<>();
 						Window win = new Window();
 						map.put("obj", data);
-						win = (Window) Executions.createComponents("/view/order/orderitem.zul", null, map);
+						win = (Window) Executions.createComponents("/view/timp2kb/verifikasip2kbdata.zul", null, map);
 						win.setWidth("70%");
 						win.setClosable(true);
 						win.doModal();
+						win.addEventListener(Events.ON_CLOSE, new EventListener<Event>() {
+							@Override
+							public void onEvent(Event event) throws Exception {
+								doReset();
+							}
+
+						});
 					}
 				});
 				row.getChildren().add(a);

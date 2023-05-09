@@ -18,6 +18,9 @@ public class AppUtils {
 	public static final String STATUS_ANGGOTA_REG_ACTIVE = "3";
 	public static final String STATUS_ANGGOTA_REG_DECLINE = "9";
 	
+	public static final String STATUS_APPROVED = "A";
+	public static final String STATUS_REJECTED = "R";
+	
 	public static final String CHARGETYPE_REG = "01";
 	public static final String CHARGETYPE_IURAN = "02";
 	
